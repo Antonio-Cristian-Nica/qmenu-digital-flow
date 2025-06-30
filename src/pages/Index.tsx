@@ -71,7 +71,7 @@ const Index = () => {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           <div className="text-2xl font-bold">
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              RestaurantOS
+              Forka
             </span>
           </div>
           <Button variant="outline" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
@@ -509,7 +509,7 @@ const Index = () => {
             <div>
               <div className="text-2xl font-bold mb-4">
                 <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                  RestaurantOS
+                  Forka
                 </span>
               </div>
               <p className="text-gray-400">
@@ -548,7 +548,7 @@ const Index = () => {
           <Separator className="my-8 bg-gray-800" />
           
           <div className="flex flex-col md:flex-row justify-between items-center text-gray-400">
-            <div>© 2024 RestaurantOS. Todos los derechos reservados.</div>
+            <div>© 2024 Forka. Todos los derechos reservados.</div>
             <div className="flex gap-6 mt-4 md:mt-0">
               <span>Privacidad</span>
               <span>Términos</span>
