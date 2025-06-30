@@ -1,27 +1,21 @@
-
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { useToast } from "@/hooks/use-toast";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { 
   ArrowDown, 
   Check, 
-  MessageSquare, 
-  Users, 
-  Youtube,
-  ArrowUp,
   Sparkles,
   Zap,
   Target
 } from "lucide-react";
+import SurveyForm from "@/components/SurveyForm";
 
 const Index = () => {
-  const { toast } = useToast();
-  const [email, setEmail] = useState('');
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
 
   // Intersection Observer for scroll animations
@@ -47,21 +41,14 @@ const Index = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleBetaSignup = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email) {
-      toast({
-        title: "¡Gracias por tu interés!",
-        description: "Te contactaremos pronto para el acceso beta.",
-      });
-      setEmail('');
-    }
-  };
-
   const addToRefs = (el: HTMLElement | null) => {
     if (el && !sectionsRef.current.includes(el)) {
       sectionsRef.current.push(el);
     }
+  };
+
+  const handleSurveySuccess = () => {
+    setIsDialogOpen(false);
   };
 
   return (
@@ -74,9 +61,16 @@ const Index = () => {
               Forka
             </span>
           </div>
-          <Button variant="outline" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
-            Demo
-          </Button>
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button variant="outline" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
+                Demo
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+              <SurveyForm onSuccess={handleSurveySuccess} />
+            </DialogContent>
+          </Dialog>
         </div>
       </nav>
 
@@ -111,13 +105,27 @@ const Index = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-              <Button size="lg" className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-6 text-lg h-auto">
-                Solicitar Demo
-              </Button>
-              <Button size="lg" variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-800 px-8 py-6 text-lg h-auto">
-                Ver Demo
-                <ArrowDown className="ml-2 h-5 w-5" />
-              </Button>
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-6 text-lg h-auto">
+                    Solicitar Demo
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                  <SurveyForm onSuccess={handleSurveySuccess} />
+                </DialogContent>
+              </Dialog>
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button size="lg" variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-800 px-8 py-6 text-lg h-auto">
+                    Ver Demo
+                    <ArrowDown className="ml-2 h-5 w-5" />
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                  <SurveyForm onSuccess={handleSurveySuccess} />
+                </DialogContent>
+              </Dialog>
             </div>
 
             <div className="flex justify-center gap-12 text-sm text-gray-500 mt-16">
@@ -476,28 +484,23 @@ const Index = () => {
               Únete a la beta y transforma tu restaurante
             </p>
 
-            <div className="max-w-md mx-auto">
-              <form onSubmit={handleBetaSignup} className="space-y-4">
-                <Input
-                  type="email"
-                  placeholder="tu-email@restaurante.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="bg-gray-900/50 border-gray-700 text-white placeholder:text-gray-400 h-12"
-                  required
-                />
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
                 <Button 
-                  type="submit" 
                   size="lg" 
-                  className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 font-semibold h-12"
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 font-semibold px-8 py-4"
                 >
                   Acceso Beta Gratuito
                 </Button>
-              </form>
-              <p className="text-sm text-gray-500 mt-4">
-                Solo actualizaciones importantes sobre el lanzamiento
-              </p>
-            </div>
+              </DialogTrigger>
+              <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                <SurveyForm onSuccess={handleSurveySuccess} />
+              </DialogContent>
+            </Dialog>
+            
+            <p className="text-sm text-gray-500 mt-6">
+              Solo actualizaciones importantes sobre el lanzamiento
+            </p>
           </div>
         </div>
       </section>
