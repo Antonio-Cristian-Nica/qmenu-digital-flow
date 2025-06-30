@@ -9,7 +9,10 @@ import {
   Check, 
   Sparkles,
   Zap,
-  Target
+  Target,
+  QrCode,
+  Smartphone,
+  CreditCard
 } from "lucide-react";
 import SurveyForm from "@/components/SurveyForm";
 
@@ -144,28 +147,79 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Hero Visual */}
+          {/* Hero Visual - Updated CTA Style */}
           <div className="mt-20 relative">
-            <div className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-3xl p-1 backdrop-blur-sm border border-purple-500/20">
-              <div className="bg-gray-900 rounded-3xl p-8">
-                <div className="grid grid-cols-3 gap-4 mb-6">
-                  <div className="h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"></div>
-                  <div className="h-2 bg-gray-700 rounded-full"></div>
-                  <div className="h-2 bg-gray-700 rounded-full"></div>
-                </div>
-                <div className="text-left space-y-4">
-                  <div className="h-4 bg-gray-700 rounded w-3/4"></div>
-                  <div className="h-4 bg-gray-700 rounded w-full"></div>
-                  <div className="h-4 bg-gray-700 rounded w-2/3"></div>
-                </div>
-                <div className="bg-gradient-to-r from-purple-600 to-cyan-600 h-12 rounded-xl mt-6 flex items-center justify-center">
-                  <span className="text-white font-semibold">Menú Digital</span>
+            <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-3xl p-1 backdrop-blur-sm border border-purple-500/30 shadow-2xl">
+              <div className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl p-12 relative overflow-hidden">
+                {/* Background Pattern */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5"></div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-full blur-3xl"></div>
+                
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="flex justify-center mb-8">
+                    <div className="bg-gradient-to-r from-purple-600 to-cyan-600 p-4 rounded-2xl">
+                      <QrCode className="w-12 h-12 text-white" />
+                    </div>
+                  </div>
+                  
+                  <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    ¡Escanea y Disfruta!
+                  </h3>
+                  
+                  <p className="text-gray-400 mb-8 text-lg">
+                    Sin apps, sin esperas. Solo escanea el QR y comienza a pedir.
+                  </p>
+                  
+                  {/* Demo Steps */}
+                  <div className="grid grid-cols-3 gap-6 mb-8">
+                    <div className="text-center">
+                      <div className="bg-purple-500/20 rounded-xl p-4 mb-3 border border-purple-500/30">
+                        <Smartphone className="w-8 h-8 mx-auto text-purple-400" />
+                      </div>
+                      <div className="text-sm text-gray-300">Escanea QR</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="bg-cyan-500/20 rounded-xl p-4 mb-3 border border-cyan-500/30">
+                        <Target className="w-8 h-8 mx-auto text-cyan-400" />
+                      </div>
+                      <div className="text-sm text-gray-300">Elige platos</div>
+                    </div>
+                    <div className="text-center">
+                      <div className="bg-green-500/20 rounded-xl p-4 mb-3 border border-green-500/30">
+                        <CreditCard className="w-8 h-8 mx-auto text-green-400" />
+                      </div>
+                      <div className="text-sm text-gray-300">Paga fácil</div>
+                    </div>
+                  </div>
+                  
+                  {/* CTA Button */}
+                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    <DialogTrigger asChild>
+                      <Button 
+                        size="lg" 
+                        className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                      >
+                        <Sparkles className="mr-2 h-5 w-5" />
+                        Probar Demo Gratis
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                      <SurveyForm onSuccess={handleSurveySuccess} />
+                    </DialogContent>
+                  </Dialog>
                 </div>
               </div>
             </div>
-            <div className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-4 py-2 rounded-full text-sm font-semibold animate-pulse">
-              QR Scan
+            
+            {/* Floating Badge */}
+            <div className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-6 py-3 rounded-full text-sm font-semibold animate-pulse shadow-lg">
+              ✨ 100% Gratis
             </div>
+            
+            {/* Bottom highlight */}
+            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent blur-sm"></div>
           </div>
         </div>
       </section>
