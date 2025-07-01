@@ -15,11 +15,23 @@ import {
   CreditCard
 } from "lucide-react";
 import SurveyForm from "@/components/SurveyForm";
+import SectionReveal from "@/components/SectionReveal";
 
 const Index = () => {
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isHeaderDemoOpen, setIsHeaderDemoOpen] = useState(false);
+  const [isEscaneaDemoOpen, setIsEscaneaDemoOpen] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [scrollPositionDemo, setScrollPositionDemo] = useState(0);
+  const [scrollPositionHeaderDemo, setScrollPositionHeaderDemo] = useState(0);
+  const [scrollPositionEscaneaDemo, setScrollPositionEscaneaDemo] = useState(0);
   const sectionsRef = useRef<(HTMLElement | null)[]>([]);
+
+  // Scroll to top on reload
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Intersection Observer for scroll animations
   useEffect(() => {
@@ -54,6 +66,49 @@ const Index = () => {
     setIsDialogOpen(false);
   };
 
+  const handleHeaderDemoDialogChange = (open: boolean) => {
+    if (open) {
+      setScrollPositionHeaderDemo(window.scrollY);
+    }
+    setIsHeaderDemoOpen(open);
+    if (!open) {
+      setTimeout(() => {
+        window.scrollTo({ top: scrollPositionHeaderDemo, behavior: 'auto' });
+      }, 10);
+    }
+  };
+
+  const handleEscaneaDemoDialogChange = (open: boolean) => {
+    if (open) {
+      setScrollPositionEscaneaDemo(window.scrollY);
+    }
+    setIsEscaneaDemoOpen(open);
+    if (!open) {
+      setTimeout(() => {
+        window.scrollTo({ top: scrollPositionEscaneaDemo, behavior: 'auto' });
+      }, 10);
+    }
+  };
+
+  // handleDialogChange debe seguir existiendo para los otros modales
+  const handleDialogChange = (open: boolean) => {
+    setIsDialogOpen(open);
+  };
+
+  // Desactiva el scroll restoration automático del navegador
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  // Forzar scroll al top al recargar la página
+  if (typeof window !== 'undefined') {
+    window.onbeforeunload = () => {
+      window.scrollTo(0, 0);
+    };
+  }
+
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       {/* Navigation */}
@@ -64,361 +119,393 @@ const Index = () => {
               Forka
             </span>
           </div>
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <Dialog open={isHeaderDemoOpen} onOpenChange={handleHeaderDemoDialogChange}>
             <DialogTrigger asChild>
                 <Button
                   className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-700"
-                  onClick={() => setIsDialogOpen(true)}
+                  onClick={() => handleHeaderDemoDialogChange(true)}
                 >
                   Demo
                 </Button>
             </DialogTrigger>
             <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
-              <SurveyForm onSuccess={handleSurveySuccess} />
+              <SurveyForm onSuccess={() => setIsHeaderDemoOpen(false)} />
             </DialogContent>
           </Dialog>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section 
-        id="hero" 
-        ref={addToRefs}
-        className={`pt-32 pb-20 px-6 transition-all duration-1000 ${
-          isVisible.hero ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="container mx-auto max-w-6xl text-center">
-          <div className="space-y-8">
-            <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-4 py-2">
-              <Sparkles className="w-4 h-4 mr-2" />
-              En desarrollo: ¡próximamente!
-            </Badge>
-            <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Transforma tu
-              </span>
-              <br />
-              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                restaurante
-              </span>
-            </h1>
-            
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
-              Tus clientes piden y pagan desde la mesa.<br />
-              <span className="text-white font-medium">Solo 2% de comisión por transacción móvil.</span>
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Button size="lg" className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-6 text-lg h-auto">
-                    Solicitar Demo
-                  </Button>
-                </DialogTrigger>
-                <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
-                  <SurveyForm onSuccess={handleSurveySuccess} />
-                </DialogContent>
-              </Dialog>
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                    <Button
-                      size="lg"
-                      className="bg-gray-900 text-white hover:bg-gray-800 px-8 py-6 text-lg h-auto border border-gray-700"
-                    >
-                      Más información
-                      <ArrowDown className="ml-2 h-5 w-5" />
+      <SectionReveal>
+        <section 
+          id="hero" 
+          ref={addToRefs}
+          className={`pt-32 pb-20 px-6`}
+        >
+          <div className="container mx-auto max-w-6xl text-center">
+            <div className="space-y-8">
+              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-4 py-2">
+                <Sparkles className="w-4 h-4 mr-2" />
+                En desarrollo: ¡próximamente!
+              </Badge>
+              <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  Transforma tu
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                  restaurante
+                </span>
+              </h1>
+              
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                Tus clientes piden y pagan desde la mesa.<br />
+                <span className="text-white font-medium">Solo 2% de comisión por transacción móvil.</span>
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
+                <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
+                  <DialogTrigger asChild>
+                    <Button size="lg" className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-6 text-lg h-auto mx-auto">
+                      Mas Información
                     </Button>
-                </DialogTrigger>
-                <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
-                  <SurveyForm onSuccess={handleSurveySuccess} />
-                </DialogContent>
-              </Dialog>
-            </div>
+                  </DialogTrigger>
+                  <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                    <SurveyForm onSuccess={handleSurveySuccess} />
+                  </DialogContent>
+                </Dialog>
+              </div>
 
-            <div className="flex justify-center gap-12 text-sm text-gray-500 mt-16">
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-green-400" />
-                Facil de instalar
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-green-400" />
-                Setup 5 min
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="h-4 w-4 text-green-400" />
-                Soporte 24/7
-              </div>
-            </div>
-          </div>
-
-          {/* Hero Visual - Updated CTA Style */}
-          <div className="mt-20 relative">
-            <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-3xl p-1 backdrop-blur-sm border border-purple-500/30 shadow-2xl">
-              <div className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl p-12 relative overflow-hidden">
-                {/* Background Pattern */}
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5"></div>
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-full blur-3xl"></div>
-                
-                {/* Content */}
-                <div className="relative z-10">
-                  <div className="flex justify-center mb-8">
-                    <div className="bg-gradient-to-r from-purple-600 to-cyan-600 p-4 rounded-2xl">
-                      <QrCode className="w-12 h-12 text-white" />
-                    </div>
-                  </div>
-                  
-                  <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    ¡Escanea y Disfruta!
-                  </h3>
-                  
-                  <p className="text-gray-400 mb-8 text-lg">
-                    Sin apps, sin esperas. Solo escanea el QR y comienza a pedir.
-                  </p>
-                  
-                  {/* Demo Steps */}
-                  <div className="grid grid-cols-3 gap-6 mb-8">
-                    <div className="text-center">
-                      <div className="bg-purple-500/20 rounded-xl p-4 mb-3 border border-purple-500/30">
-                        <Smartphone className="w-8 h-8 mx-auto text-purple-400" />
-                      </div>
-                      <div className="text-sm text-gray-300">Escanea QR</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="bg-cyan-500/20 rounded-xl p-4 mb-3 border border-cyan-500/30">
-                        <Target className="w-8 h-8 mx-auto text-cyan-400" />
-                      </div>
-                      <div className="text-sm text-gray-300">Elige platos</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="bg-green-500/20 rounded-xl p-4 mb-3 border border-green-500/30">
-                        <CreditCard className="w-8 h-8 mx-auto text-green-400" />
-                      </div>
-                      <div className="text-sm text-gray-300">Paga fácil</div>
-                    </div>
-                  </div>
-                  
-                  {/* CTA Button */}
-                  <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button 
-                        size="lg" 
-                        className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
-                      >
-                        <Sparkles className="mr-2 h-5 w-5" />
-                        Probar Demo Gratis
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
-                      <SurveyForm onSuccess={handleSurveySuccess} />
-                    </DialogContent>
-                  </Dialog>
+              <div className="flex justify-center gap-12 text-sm text-gray-500 mt-16">
+                <div className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-green-400" />
+                  Facil de instalar
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-green-400" />
+                  Setup 5 min
+                </div>
+                <div className="flex items-center gap-2">
+                  <Check className="h-4 w-4 text-green-400" />
+                  Soporte 24/7
                 </div>
               </div>
             </div>
-            
-            {/* Floating Badge */}
-            <div className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-6 py-3 rounded-full text-sm font-semibold animate-pulse shadow-lg">
-              La mejor experiencia
+
+            {/* Hero Visual - Updated CTA Style */}
+            <div className="mt-20 relative">
+              <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-3xl p-1 backdrop-blur-sm border border-purple-500/30 shadow-2xl">
+                <div className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl p-12 relative overflow-hidden">
+                  {/* Background Pattern */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-full blur-3xl"></div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
+                    <div className="flex justify-center mb-8">
+                      <div className="bg-gradient-to-r from-purple-600 to-cyan-600 p-4 rounded-2xl">
+                        <QrCode className="w-12 h-12 text-white" />
+                      </div>
+                    </div>
+                    
+                    <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                      ¡Escanea y Disfruta!
+                    </h3>
+                    
+                    <p className="text-gray-400 mb-8 text-lg">
+                      Sin apps, sin esperas. Solo escanea el QR y comienza a pedir.
+                    </p>
+                    
+                    {/* Demo Steps */}
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                      <div className="text-center group">
+                        <div className="bg-purple-500/20 rounded-xl p-4 mb-3 border border-purple-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(168,85,247,0.5)]">
+                          <Smartphone className="w-8 h-8 mx-auto text-purple-400 transition-transform duration-300 group-hover:scale-125" />
+                        </div>
+                        <div className="text-sm text-gray-300">Escanea QR</div>
+                      </div>
+                      <div className="text-center group">
+                        <div className="bg-cyan-500/20 rounded-xl p-4 mb-3 border border-cyan-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(34,211,238,0.5)]">
+                          <Target className="w-8 h-8 mx-auto text-cyan-400 transition-transform duration-300 group-hover:scale-125" />
+                        </div>
+                        <div className="text-sm text-gray-300">Elige platos</div>
+                      </div>
+                      <div className="text-center group">
+                        <div className="bg-green-500/20 rounded-xl p-4 mb-3 border border-green-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(34,197,94,0.5)]">
+                          <CreditCard className="w-8 h-8 mx-auto text-green-400 transition-transform duration-300 group-hover:scale-125" />
+                        </div>
+                        <div className="text-sm text-gray-300">Paga fácil</div>
+                      </div>
+                    </div>
+                    
+                    {/* CTA Button */}
+                    <Dialog open={isEscaneaDemoOpen} onOpenChange={handleEscaneaDemoDialogChange}>
+                      <DialogTrigger asChild>
+                        <Button 
+                          size="lg" 
+                          className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                          onClick={() => handleEscaneaDemoDialogChange(true)}
+                        >
+                          <Sparkles className="mr-2 h-5 w-5" />
+                          Probar Demo Gratis
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                        <SurveyForm onSuccess={() => setIsEscaneaDemoOpen(false)} />
+                      </DialogContent>
+                    </Dialog>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Floating Badge */}
+              <div className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-6 py-3 rounded-full text-sm font-semibold animate-pulse shadow-lg">
+                La mejor experiencia
+              </div>
+              
+              {/* Bottom highlight */}
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent blur-sm"></div>
             </div>
-            
-            {/* Bottom highlight */}
-            <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent blur-sm"></div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
       {/* How it Works */}
-      <section 
-        id="how-it-works" 
-        ref={addToRefs}
-        className={`py-24 px-6 transition-all duration-1000 delay-200 ${
-          isVisible['how-it-works'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Simple para clientes
-              </span>
-            </h2>
-            <p className="text-xl text-gray-400">Tres pasos. Cero fricción.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Escanea",
-                description: "QR → Menú digital instantáneo",
-                icon: "📱"
-              },
-              {
-                step: "02", 
-                title: "Colabora",
-                description: "Todos añaden platos al pedido",
-                icon: "🤝"
-              },
-              {
-                step: "03",
-                title: "Paga", 
-                description: "Juntos o dividido. Bizum, tarjeta, Apple Pay",
-                icon: "💳"
-              }
-            ].map((item, index) => (
-              <Card key={index} className="group bg-gray-900/50 border-gray-800 hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-2">
-                <CardContent className="p-8 text-center space-y-6">
-                  <div className="text-5xl mb-4">{item.icon}</div>
-                  <div className="text-sm font-bold text-purple-400 mb-2">{item.step}</div>
-                  <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{item.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Restaurant App */}
-      <section 
-        id="restaurant-app" 
-        ref={addToRefs}
-        className={`py-24 px-6 transition-all duration-1000 delay-300 ${
-          isVisible['restaurant-app'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 mb-6">
-                <Zap className="w-4 h-4 mr-2" />
-                App Móvil
-              </Badge>
+      <SectionReveal delay={100}>
+        <section 
+          id="how-it-works" 
+          ref={addToRefs}
+          className={`py-24 px-6`}
+        >
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-20">
               <h2 className="text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  Control total
+                  Simple para clientes
                 </span>
               </h2>
-              <p className="text-xl text-gray-400 mb-8">
-                Gestiona pedidos, actualiza menú, genera QR y analiza todo desde una app intuitiva.
-              </p>
-
-              <div className="space-y-4">
-                {[
-                  "Pedidos en tiempo real",
-                  "Estado de platos actualizable", 
-                  "QR por mesa",
-                  "Analytics avanzados",
-                  "Gestión de pagos",
-                  "Roles de empleados"
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-center gap-3">
-                    <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"></div>
-                    <span className="text-gray-300">{feature}</span>
-                  </div>
-                ))}
-              </div>
+              <p className="text-xl text-gray-400">Tres pasos. Cero fricción.</p>
             </div>
 
-            <div className="relative">
-              <div className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-3xl p-8 border border-purple-500/20">
-                <div className="grid grid-cols-2 gap-4">
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  step: "01",
+                  title: "Escanea",
+                  description: "QR → Menú digital instantáneo",
+                  icon: "📱"
+                },
+                {
+                  step: "02", 
+                  title: "Colabora",
+                  description: "Todos añaden platos al pedido",
+                  icon: "🤝"
+                },
+                {
+                  step: "03",
+                  title: "Paga", 
+                  description: "Juntos o dividido. Bizum, tarjeta, Apple Pay",
+                  icon: "💳"
+                }
+              ].map((item, index) => (
+                <Card key={index} className="group bg-gray-900/50 border-gray-800 hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-2">
+                  <CardContent className="p-8 text-center space-y-6">
+                    <div className="text-5xl mb-4">{item.icon}</div>
+                    <div className="text-sm font-bold text-purple-400 mb-2">{item.step}</div>
+                    <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
+                    <p className="text-gray-400 leading-relaxed">{item.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </section>
+      </SectionReveal>
+
+      {/* Restaurant App */}
+      <SectionReveal delay={200}>
+        <section 
+          id="restaurant-app" 
+          ref={addToRefs}
+          className={`py-24 px-6`}
+        >
+          <div className="container mx-auto max-w-6xl">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              <div>
+                <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 mb-6">
+                  <Zap className="w-4 h-4 mr-2" />
+                  App Móvil
+                </Badge>
+                <h2 className="text-5xl font-bold mb-6">
+                  <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    Control total
+                  </span>
+                </h2>
+                <p className="text-xl text-gray-400 mb-8">
+                  Gestiona pedidos, actualiza menú, genera QR y analiza todo desde una app intuitiva.
+                </p>
+
+                <div className="space-y-4">
                   {[
-                    { title: "Pedidos", value: "23", color: "from-purple-500 to-purple-600" },
-                    { title: "Mesas", value: "12", color: "from-cyan-500 to-cyan-600" },
-                    { title: "Hoy", value: "€1,234", color: "from-purple-500 to-cyan-500" },
-                    { title: "Tiempo", value: "8min", color: "from-cyan-500 to-purple-500" }
-                  ].map((stat, index) => (
-                    <div key={index} className="bg-gray-900/80 rounded-xl p-6 border border-gray-800">
-                      <div className={`w-8 h-8 bg-gradient-to-r ${stat.color} rounded-lg mb-3`}></div>
-                      <div className="text-2xl font-bold text-white">{stat.value}</div>
-                      <div className="text-sm text-gray-400">{stat.title}</div>
+                    "Pedidos en tiempo real",
+                    "Estado de platos actualizable", 
+                    "QR por mesa",
+                    "Analytics avanzados",
+                    "Gestión de pagos",
+                    "Roles de empleados"
+                  ].map((feature, index) => (
+                    <div key={index} className="flex items-center gap-3">
+                      <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"></div>
+                      <span className="text-gray-300">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
+
+              <div className="relative">
+                <div className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-3xl p-8 border border-purple-500/20">
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { title: "Pedidos", value: "23", color: "from-purple-500 to-purple-600", shadow: "shadow-[0_0_16px_rgba(168,85,247,0.3)]" },
+                      { title: "Mesas", value: "12", color: "from-cyan-500 to-cyan-600", shadow: "shadow-[0_0_16px_rgba(34,211,238,0.3)]" },
+                      { title: "Hoy", value: "€1,234", color: "from-purple-500 to-cyan-500", shadow: "shadow-[0_0_16px_rgba(34,197,94,0.3)]" },
+                      { title: "Tiempo", value: "8min", color: "from-cyan-500 to-purple-500", shadow: "shadow-[0_0_16px_rgba(59,130,246,0.3)]" }
+                    ].map((stat, index) => (
+                      <div key={index} className="bg-gray-900/80 rounded-xl p-6 border border-gray-800 group transition-all duration-300 hover:border-purple-500/30 hover:-translate-y-1 text-left">
+                        <div className={`w-8 h-8 bg-gradient-to-r ${stat.color} rounded-lg mb-3 flex items-center justify-start transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse group-hover:${stat.shadow}`}></div>
+                        <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                        <div className="text-sm text-gray-400">{stat.title}</div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
       {/* AI Features */}
-      <section 
-        id="ai-features" 
-        ref={addToRefs}
-        className={`py-24 px-6 transition-all duration-1000 delay-400 ${
-          isVisible['ai-features'] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-20">
-            <Badge className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-purple-300 border-purple-500/30 mb-6">
-              <Target className="w-4 h-4 mr-2" />
-              Inteligencia Artificial
-            </Badge>
-            <h2 className="text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                IA que trabaja para ti
-              </span>
-            </h2>
-          </div>
+      <SectionReveal delay={300}>
+        <section 
+          id="ai-features" 
+          ref={addToRefs}
+          className={`py-24 px-6`}
+        >
+          <div className="container mx-auto max-w-6xl">
+            <div className="text-center mb-20">
+              <Badge className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-purple-300 border-purple-500/30 mb-6">
+                <Target className="w-4 h-4 mr-2" />
+                Inteligencia Artificial
+              </Badge>
+              <h2 className="text-5xl font-bold mb-6">
+                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  IA que trabaja para ti
+                </span>
+              </h2>
+            </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: "📸",
-                title: "Lectura de Menús",
-                description: "Sube una foto y la IA extrae platos, ingredientes y alérgenos automáticamente"
-              },
-              {
-                icon: "🔍",
-                title: "Filtros Inteligentes", 
-                description: "Filtrado por alergias, dietas veganas, sin gluten y preferencias personales"
-              },
-              {
-                icon: "📊",
-                title: "Analytics Predictivos",
-                description: "Platos populares, tiempos de espera y optimización de rendimiento"
-              }
-            ].map((feature, index) => (
-              <Card key={index} className="group bg-gray-900/30 border-gray-800 hover:border-purple-500/30 transition-all duration-300 hover:bg-gray-900/50">
-                <CardContent className="p-8 text-center space-y-6">
-                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {feature.icon}
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{feature.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  icon: "📸",
+                  title: "Lectura de Menús",
+                  description: "Sube una foto y la IA extrae platos, ingredientes y alérgenos automáticamente"
+                },
+                {
+                  icon: "🔍",
+                  title: "Filtros Inteligentes", 
+                  description: "Filtrado por alergias, dietas veganas, sin gluten y preferencias personales"
+                },
+                {
+                  icon: "📊",
+                  title: "Analytics Predictivos",
+                  description: "Platos populares, tiempos de espera y optimización de rendimiento"
+                }
+              ].map((feature, index) => (
+                <Card key={index} className="group bg-gray-900/30 border-gray-800 hover:border-purple-500/30 transition-all duration-300 hover:bg-gray-900/50">
+                  <CardContent className="p-8 text-center space-y-6">
+                    <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
+                    <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
 
       {/* Tech Stack */}
-      <section 
-        id="tech" 
-        ref={addToRefs}
-        className={`py-16 px-6 transition-all duration-1000 delay-500 ${
-          isVisible.tech ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-        }`}
-      >
-        <div className="container mx-auto max-w-4xl text-center">
-          <h3 className="text-2xl font-bold mb-8 text-gray-400">Tecnología de vanguardia</h3>
-          <div className="flex flex-wrap justify-center gap-6 items-center">
-            {[
-              "Next.js", "React Native", "NestJS", "PostgreSQL", 
-              "Stripe", "Socket.io", "Cloud Vision", "Expo"
-            ].map((tech, index) => (
-              <Badge key={index} variant="outline" className="px-4 py-2 text-sm border-gray-700 text-gray-400 hover:border-purple-500/50">
-                {tech}
-              </Badge>
-            ))}
+      <SectionReveal delay={400}>
+        <section 
+          id="tech" 
+          ref={addToRefs}
+          className={`py-16 px-6`}
+        >
+          <div className="container mx-auto max-w-4xl text-center">
+            <h3 className="text-2xl font-bold mb-8 text-white">Tecnología de vanguardia</h3>
+            <div className="flex flex-wrap justify-center gap-6 items-center">
+              {[
+                "Next.js", "React Native", "NestJS", "PostgreSQL", 
+                "Stripe", "Socket.io", "Cloud Vision", "Expo"
+              ].map((tech, index) => (
+                <Badge key={index} variant="outline" className="px-4 py-2 text-sm border-gray-700 text-white hover:border-purple-500/50">
+                  {tech}
+                </Badge>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </SectionReveal>
+
+      {/* Suscripción */}
+      <SectionReveal delay={500}>
+        <section id="suscripcion" className="py-24 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 relative">
+          <div className="container mx-auto max-w-2xl">
+            <div className="relative">
+              {/* Overlay negro semitransparente para oscurecer el gradiente */}
+              <div className="absolute inset-0 bg-black/40 rounded-3xl z-0 pointer-events-none" />
+              <div className="bg-gradient-to-r from-purple-700 to-cyan-700 rounded-3xl shadow-2xl p-10 md:p-16 text-white text-center border-2 border-purple-500/30 relative z-10">
+                <h2 className="text-4xl font-bold mb-4">Suscripción Premium: <span className="text-5xl">79,99 €/mes</span></h2>
+                <ul className="text-lg text-left mx-auto max-w-xl space-y-6 mt-10">
+                  <li>
+                    <span className="font-bold">Menú Digital IA:</span><br />
+                    OCR + IA extrae platos, ingredientes y alérgenos desde foto; edición y organización manual.
+                  </li>
+                  <li>
+                    <span className="font-bold">Pedidos & Pagos QR:</span><br />
+                    QRs ilimitados por mesa · Carrito colaborativo con líder de mesa · Split inteligente · Stripe (tarjeta, Apple/Google Pay) + Bizum + pago en caja.
+                  </li>
+                  <li>
+                    <span className="font-bold">App Móvil React Native:</span><br />
+                    Panel “Propietario” (CRUD menú, QRs, ajustes) · Panel “Empleado” (ver/actualizar estados de pedido).
+                  </li>
+                  <li>
+                    <span className="font-bold">Dashboard & Analíticas:</span><br />
+                    Estadísticas en tiempo real · Informes exportables (CSV/PDF) · Gráficas de ingresos, platos más vendidos y tiempos de preparación.
+                  </li>
+                  <li>
+                    <span className="font-bold">IA Avanzada:</span><br />
+                    Recomendaciones de plato · Filtros por dieta/alérgenos · Predicción de demanda para optimizar stock.
+                  </li>
+                  <li>
+                    <span className="font-bold">Comunicación Instantánea:</span><br />
+                    Notificaciones WebSocket · Chat ligero cliente–empleado · “Llamar al camarero” en la app.
+                  </li>
+                  <li>
+                    <span className="font-bold">Seguridad & Soporte:</span><br />
+                    Multi‑tenant seguro (roles aislados) · Backups automáticos + GDPR · Soporte Premium 24/7 (&lt; 4 h) · Acceso anticipado a nuevas funciones.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+      </SectionReveal>
 
       {/* Testimonials */}
       <section 
@@ -543,7 +630,7 @@ const Index = () => {
               Únete a la beta y transforma tu restaurante
             </p>
 
-            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
               <DialogTrigger asChild>
                 <Button 
                   size="lg" 
@@ -565,58 +652,32 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-16 px-6 border-t border-gray-800">
-        <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="text-2xl font-bold mb-4">
-                <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                  Forka
-                </span>
-              </div>
-              <p className="text-gray-400">
-                Transformando la experiencia gastronómica
-              </p>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Producto</h4>
-              <div className="space-y-2 text-gray-400">
-                <div>Características</div>
-                <div>Precios</div>
-                <div>Demo</div>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Empresa</h4>
-              <div className="space-y-2 text-gray-400">
-                <div>Sobre nosotros</div>
-                <div>Blog</div>
-                <div>Contacto</div>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-semibold mb-4 text-white">Soporte</h4>
-              <div className="space-y-2 text-gray-400">
-                <div>Centro de ayuda</div>
-                <div>Documentación</div>
-                <div>Soporte</div>
-              </div>
-            </div>
+      <footer className="py-10 px-6 border-t border-gray-800">
+        <div className="container mx-auto max-w-6xl text-center">
+          <div className="text-2xl font-bold mb-2">
+            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+              Forka
+            </span>
           </div>
-          
-          <Separator className="my-8 bg-gray-800" />
-          
-          <div className="flex flex-col md:flex-row justify-between items-center text-gray-400">
-            <div>© 2024 Forka. Todos los derechos reservados.</div>
-            <div className="flex gap-6 mt-4 md:mt-0">
-              <span>Privacidad</span>
-              <span>Términos</span>
-              <span>Cookies</span>
-            </div>
+          <p className="text-gray-500 text-sm mb-4">Innovando la experiencia gastronómica</p>
+          <div className="flex justify-center gap-6 mb-4">
+            {/* Instagram Logo */}
+            <span className="inline-block" title="Instagram">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pink-500">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+              </svg>
+            </span>
+            {/* X (Twitter) Logo */}
+            <span className="inline-block" title="X">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
+                <path d="M17.5 6.5L6.5 17.5"></path>
+                <path d="M6.5 6.5l11 11"></path>
+              </svg>
+            </span>
           </div>
+          <div className="text-gray-700 text-xs">© 2024 Forka</div>
         </div>
       </footer>
     </div>
