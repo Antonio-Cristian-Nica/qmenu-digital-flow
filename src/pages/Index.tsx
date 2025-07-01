@@ -66,9 +66,12 @@ const Index = () => {
           </div>
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-              <Button variant="outline" className="border-purple-500/30 text-purple-300 hover:bg-purple-500/10">
-                Demo
-              </Button>
+                <Button
+                  className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-700"
+                  onClick={() => setIsDialogOpen(true)}
+                >
+                  Demo
+                </Button>
             </DialogTrigger>
             <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
               <SurveyForm onSuccess={handleSurveySuccess} />
@@ -89,9 +92,8 @@ const Index = () => {
           <div className="space-y-8">
             <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-4 py-2">
               <Sparkles className="w-4 h-4 mr-2" />
-              Beta Disponible
+              En desarrollo: ¡próximamente!
             </Badge>
-            
             <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 Transforma tu
@@ -104,7 +106,7 @@ const Index = () => {
             
             <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
               Tus clientes piden y pagan desde la mesa.<br />
-              <span className="text-white font-medium">Solo 2% por transacción móvil.</span>
+              <span className="text-white font-medium">Solo 2% de comisión por transacción móvil.</span>
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
@@ -120,10 +122,13 @@ const Index = () => {
               </Dialog>
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogTrigger asChild>
-                  <Button size="lg" variant="outline" className="border-gray-700 text-gray-300 hover:bg-gray-800 px-8 py-6 text-lg h-auto">
-                    Ver Demo
-                    <ArrowDown className="ml-2 h-5 w-5" />
-                  </Button>
+                    <Button
+                      size="lg"
+                      className="bg-gray-900 text-white hover:bg-gray-800 px-8 py-6 text-lg h-auto border border-gray-700"
+                    >
+                      Más información
+                      <ArrowDown className="ml-2 h-5 w-5" />
+                    </Button>
                 </DialogTrigger>
                 <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
                   <SurveyForm onSuccess={handleSurveySuccess} />
@@ -134,7 +139,7 @@ const Index = () => {
             <div className="flex justify-center gap-12 text-sm text-gray-500 mt-16">
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-green-400" />
-                Sin instalación
+                Facil de instalar
               </div>
               <div className="flex items-center gap-2">
                 <Check className="h-4 w-4 text-green-400" />
@@ -215,7 +220,7 @@ const Index = () => {
             
             {/* Floating Badge */}
             <div className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-6 py-3 rounded-full text-sm font-semibold animate-pulse shadow-lg">
-              ✨ 100% Gratis
+              La mejor experiencia
             </div>
             
             {/* Bottom highlight */}

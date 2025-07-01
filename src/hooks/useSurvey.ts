@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -19,27 +18,31 @@ export const useSurvey = () => {
 
   const submitSurvey = async (data: Omit<SurveyData, 'id' | 'submittedAt'>): Promise<boolean> => {
     setIsSubmitting(true);
-    
     try {
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const surveyEntry: SurveyData = {
-        ...data,
-        id: crypto.randomUUID(),
-        submittedAt: new Date()
-      };
-
-      // Store in localStorage (simulating database)
-      const existingSurveys = JSON.parse(localStorage.getItem('forka_surveys') || '[]');
-      existingSurveys.push(surveyEntry);
-      localStorage.setItem('forka_surveys', JSON.stringify(existingSurveys));
+      // Enviar datos a SheetDB
+      const response = await fetch('https://sheetdb.io/api/v1/2kml8y757oq23', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          data: {
+            email: data.email,
+            restaurantName: data.restaurantName || '',
+            tableCount: data.tableCount?.toString() || '',
+            currentSystem: data.currentSystem || '',
+            interests: data.interests.join(', '),
+            wantsDemo: data.wantsDemo ? 'Sí' : 'No',
+            submittedAt: new Date().toISOString(),
+          }
+        })
+      });
+      if (!response.ok) throw new Error('No se pudo guardar en SheetDB');
 
       toast({
         title: "¡Registrado exitosamente!",
-        description: "Te contactaremos pronto con novedades sobre Forka.",
+        description: "Te contactaremos pronto con novedades sobre Forka."
       });
-
       return true;
     } catch (error) {
       toast({
@@ -53,13 +56,9 @@ export const useSurvey = () => {
     }
   };
 
-  const getSurveys = (): SurveyData[] => {
-    return JSON.parse(localStorage.getItem('forka_surveys') || '[]');
-  };
-
   return {
     submitSurvey,
-    getSurveys,
+    getSurveys: () => [], // Deshabilitado el guardado local
     isSubmitting
   };
 };
