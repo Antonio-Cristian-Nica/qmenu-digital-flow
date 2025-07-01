@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+
 import { 
   ArrowDown, 
   Check, 
@@ -380,6 +381,33 @@ const Index = () => {
                     ))}
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* App Store & Google Play Badges - Próximamente */}
+            <div className="w-full flex flex-col items-center justify-center py-10">
+              <span className="text-lg font-semibold text-white mb-4">Próximamente disponible en App Store y Google Play</span>
+              <div className="flex gap-4">
+                {/* App Store badge */}
+                <a href="#" className="overflow-hidden rounded-lg shadow-lg" tabIndex={-1} aria-disabled>
+                  <img
+                    src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
+                    alt="Disponible próximamente en App Store"
+                    width={150}
+                    height={50}
+                    style={{ opacity: 0.5, pointerEvents: 'none' }}
+                  />
+                </a>
+                {/* Google Play badge */}
+                <a href="#" className="overflow-hidden rounded-lg shadow-lg" tabIndex={-1} aria-disabled>
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+                    alt="Disponible próximamente en Google Play"
+                    width={150}
+                    height={50}
+                    style={{ opacity: 0.5, pointerEvents: 'none' }}
+                  />
+                </a>
               </div>
             </div>
           </div>
