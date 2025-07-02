@@ -149,7 +149,7 @@ const Index = () => {
                 <Sparkles className="w-4 h-4 mr-2" />
                 En desarrollo: ¡próximamente!
               </Badge>
-              <h1 className="text-6xl lg:text-7xl font-bold leading-tight">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-center">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   Transforma tu
                 </span>
