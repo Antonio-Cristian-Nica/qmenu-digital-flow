@@ -329,21 +329,21 @@ const Index = () => {
         <section 
           id="restaurant-app" 
           ref={addToRefs}
-          className={`py-24 px-6`}
+          className={`py-16 sm:py-24 px-4 sm:px-6`}
         >
           <div className="container mx-auto max-w-6xl">
-            <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               <div>
-                <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 mb-6">
-                  <Zap className="w-4 h-4 mr-2" />
+                <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 mb-4 sm:mb-6">
+                  <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                   App Móvil
                 </Badge>
-                <h2 className="text-5xl font-bold mb-6">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
                   <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                     Control total
                   </span>
                 </h2>
-                <p className="text-xl text-gray-400 mb-8">
+                <p className="text-lg sm:text-xl text-gray-400 mb-6 sm:mb-8">
                   Gestiona pedidos, actualiza menú, genera QR y analiza todo desde una app intuitiva.
                 </p>
 
@@ -365,18 +365,18 @@ const Index = () => {
               </div>
 
               <div className="relative">
-                <div className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-3xl p-8 border border-purple-500/20">
-                  <div className="grid grid-cols-2 gap-4">
+                <div className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-purple-500/20">
+                  <div className="grid grid-cols-2 gap-3 sm:gap-4">
                     {[
                       { title: "Pedidos", value: "23", color: "from-purple-500 to-purple-600", shadow: "shadow-[0_0_16px_rgba(168,85,247,0.3)]" },
                       { title: "Mesas", value: "12", color: "from-cyan-500 to-cyan-600", shadow: "shadow-[0_0_16px_rgba(34,211,238,0.3)]" },
                       { title: "Hoy", value: "€1,234", color: "from-purple-500 to-cyan-500", shadow: "shadow-[0_0_16px_rgba(34,197,94,0.3)]" },
                       { title: "Tiempo", value: "8min", color: "from-cyan-500 to-purple-500", shadow: "shadow-[0_0_16px_rgba(59,130,246,0.3)]" }
                     ].map((stat, index) => (
-                      <div key={index} className="bg-gray-900/80 rounded-xl p-6 border border-gray-800 group transition-all duration-300 hover:border-purple-500/30 hover:-translate-y-1 text-left">
-                        <div className={`w-8 h-8 bg-gradient-to-r ${stat.color} rounded-lg mb-3 flex items-center justify-start transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse group-hover:${stat.shadow}`}></div>
-                        <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
-                        <div className="text-sm text-gray-400">{stat.title}</div>
+                      <div key={index} className="bg-gray-900/80 rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 border border-gray-800 group transition-all duration-300 hover:border-purple-500/30 hover:-translate-y-1 text-left">
+                        <div className={`w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gradient-to-r ${stat.color} rounded-md sm:rounded-lg mb-2 sm:mb-3 flex items-center justify-start transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse group-hover:${stat.shadow}`}></div>
+                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-1">{stat.value}</div>
+                        <div className="text-xs sm:text-sm text-gray-400">{stat.title}</div>
                       </div>
                     ))}
                   </div>
@@ -385,17 +385,18 @@ const Index = () => {
             </div>
 
             {/* App Store & Google Play Badges - Próximamente */}
-            <div className="w-full flex flex-col items-center justify-center py-10">
-              <span className="text-lg font-semibold text-white mb-4">Próximamente disponible en App Store y Google Play</span>
-              <div className="flex gap-4">
+            <div className="w-full flex flex-col items-center justify-center py-6 sm:py-8 lg:py-10">
+              <span className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 text-center px-4">Próximamente disponible en App Store y Google Play</span>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
                 {/* App Store badge */}
                 <a href="#" className="overflow-hidden rounded-lg shadow-lg" tabIndex={-1} aria-disabled>
                   <img
                     src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg"
                     alt="Disponible próximamente en App Store"
-                    width={150}
-                    height={50}
-                    style={{ opacity: 0.5, pointerEvents: 'none' }}
+                    width="120"
+                    height="40"
+                    className="sm:w-[150px] sm:h-[50px] opacity-50"
+                    style={{ pointerEvents: 'none' }}
                   />
                 </a>
                 {/* Google Play badge */}
@@ -403,9 +404,10 @@ const Index = () => {
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
                     alt="Disponible próximamente en Google Play"
-                    width={150}
-                    height={50}
-                    style={{ opacity: 0.5, pointerEvents: 'none' }}
+                    width="120"
+                    height="40"
+                    className="sm:w-[150px] sm:h-[50px] opacity-50"
+                    style={{ pointerEvents: 'none' }}
                   />
                 </a>
               </div>
