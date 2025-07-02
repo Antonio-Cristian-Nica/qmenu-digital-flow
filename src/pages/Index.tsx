@@ -506,35 +506,35 @@ const Index = () => {
               {/* Overlay negro semitransparente para oscurecer el gradiente */}
               <div className="absolute inset-0 bg-black/40 rounded-3xl z-0 pointer-events-none" />
               <div className="bg-gradient-to-r from-purple-700 to-cyan-700 rounded-3xl shadow-2xl p-10 md:p-16 text-white text-center border-2 border-purple-500/30 relative z-10">
-                <h2 className="text-4xl font-bold mb-4">Suscripción Premium: <span className="text-5xl">79,99 €/mes</span></h2>
+                <h2 className="text-4xl font-bold mb-4">{t('subscription.title')} <span className="text-5xl">{t('subscription.price')}</span></h2>
                 <ul className="text-lg text-left mx-auto max-w-xl space-y-6 mt-10">
                   <li>
-                    <span className="font-bold">Menú Digital IA:</span><br />
-                    OCR + IA extrae platos, ingredientes y alérgenos desde foto; edición y organización manual.
+                    <span className="font-bold">{t('subscription.feature1.title')}</span><br />
+                    {t('subscription.feature1.desc')}
                   </li>
                   <li>
-                    <span className="font-bold">Pedidos & Pagos QR:</span><br />
-                    QRs ilimitados por mesa · Carrito colaborativo con líder de mesa · Split inteligente · Stripe (tarjeta, Apple/Google Pay) + Bizum + pago en caja.
+                    <span className="font-bold">{t('subscription.feature2.title')}</span><br />
+                    {t('subscription.feature2.desc')}
                   </li>
                   <li>
-                    <span className="font-bold">App Móvil React Native:</span><br />
-                    Panel “Propietario” (CRUD menú, QRs, ajustes) · Panel “Empleado” (ver/actualizar estados de pedido).
+                    <span className="font-bold">{t('subscription.feature3.title')}</span><br />
+                    {t('subscription.feature3.desc')}
                   </li>
                   <li>
-                    <span className="font-bold">Dashboard & Analíticas:</span><br />
-                    Estadísticas en tiempo real · Informes exportables (CSV/PDF) · Gráficas de ingresos, platos más vendidos y tiempos de preparación.
+                    <span className="font-bold">{t('subscription.feature4.title')}</span><br />
+                    {t('subscription.feature4.desc')}
                   </li>
                   <li>
-                    <span className="font-bold">IA Avanzada:</span><br />
-                    Recomendaciones de plato · Filtros por dieta/alérgenos · Predicción de demanda para optimizar stock.
+                    <span className="font-bold">{t('subscription.feature5.title')}</span><br />
+                    {t('subscription.feature5.desc')}
                   </li>
                   <li>
-                    <span className="font-bold">Comunicación Instantánea:</span><br />
-                    Notificaciones WebSocket · Chat ligero cliente–empleado · “Llamar al camarero” en la app.
+                    <span className="font-bold">{t('subscription.feature6.title')}</span><br />
+                    {t('subscription.feature6.desc')}
                   </li>
                   <li>
-                    <span className="font-bold">Seguridad & Soporte:</span><br />
-                    Multi‑tenant seguro (roles aislados) · Backups automáticos + GDPR · Soporte Premium 24/7 (&lt; 4 h) · Acceso anticipado a nuevas funciones.
+                    <span className="font-bold">{t('subscription.feature7.title')}</span><br />
+                    {t('subscription.feature7.desc')}
                   </li>
                 </ul>
               </div>
