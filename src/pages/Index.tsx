@@ -249,7 +249,7 @@ const Index = () => {
                           onClick={() => handleEscaneaDemoDialogChange(true)}
                         >
                           <Sparkles className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                          Probar Demo Gratis
+                          Únete a la Beta
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="bg-gray-900 border-gray-800 max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
