@@ -245,14 +245,14 @@ const Index = () => {
                       <DialogTrigger asChild>
                         <Button 
                           size="lg" 
-                          className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-4 text-lg font-semibold shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105"
+                          className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-sm sm:text-base lg:text-lg font-semibold shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                           onClick={() => handleEscaneaDemoDialogChange(true)}
                         >
-                          <Sparkles className="mr-2 h-5 w-5" />
+                          <Sparkles className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                           Probar Demo Gratis
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                      <DialogContent className="bg-gray-900 border-gray-800 max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
                         <SurveyForm onSuccess={() => setIsEscaneaDemoOpen(false)} />
                       </DialogContent>
                     </Dialog>
