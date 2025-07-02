@@ -106,7 +106,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ onSuccess }) => {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="tableCount" className="text-white">
                 Número de mesas
@@ -136,7 +136,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ onSuccess }) => {
 
           <div className="space-y-3">
             <Label className="text-white">¿Qué te interesa más?</Label>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {interestOptions.map((interest) => (
                 <div key={interest} className="flex items-center space-x-2">
                   <Checkbox
@@ -175,7 +175,7 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ onSuccess }) => {
           <Button 
             type="submit" 
             disabled={isSubmitting}
-            className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700"
+            className="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 py-3 text-base sm:text-lg"
           >
             {isSubmitting ? 'Enviando...' : 'Unirme a la Beta'}
           </Button>

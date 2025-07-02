@@ -539,7 +539,7 @@ const Index = () => {
       <section 
         id="testimonials" 
         ref={addToRefs}
-        className={`py-24 px-6 transition-all duration-1000 delay-600 ${
+        className={`py-16 sm:py-24 px-4 sm:px-6 transition-all duration-1000 delay-600 ${
           isVisible.testimonials ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
@@ -601,15 +601,15 @@ const Index = () => {
         }`}
       >
         <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-5xl font-bold mb-6">
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 FAQ
               </span>
             </h2>
           </div>
 
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {[
               {
                 q: "¿Cuánto cuesta?",
@@ -643,18 +643,18 @@ const Index = () => {
       <section 
         id="cta" 
         ref={addToRefs}
-        className={`py-24 px-6 transition-all duration-1000 delay-800 ${
+        className={`py-16 sm:py-24 px-4 sm:px-6 transition-all duration-1000 delay-800 ${
           isVisible.cta ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}
       >
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="bg-gradient-to-br from-purple-900/50 to-cyan-900/50 rounded-3xl p-12 border border-purple-500/20 backdrop-blur-sm">
-            <h2 className="text-5xl font-bold mb-6">
+          <div className="bg-gradient-to-br from-purple-900/50 to-cyan-900/50 rounded-2xl sm:rounded-3xl p-6 sm:p-12 border border-purple-500/20 backdrop-blur-sm">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 ¿Listo para revolucionar?
               </span>
             </h2>
-            <p className="text-xl text-gray-300 mb-12">
+            <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-12 px-4 sm:px-0">
               Únete a la beta y transforma tu restaurante
             </p>
 
@@ -662,17 +662,17 @@ const Index = () => {
               <DialogTrigger asChild>
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 font-semibold px-8 py-4"
+                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 font-semibold px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto"
                 >
                   Acceso Beta Gratuito
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+              <DialogContent className="bg-gray-900 border-gray-800 max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
                 <SurveyForm onSuccess={handleSurveySuccess} />
               </DialogContent>
             </Dialog>
             
-            <p className="text-sm text-gray-500 mt-6">
+            <p className="text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6 px-4 sm:px-0">
               Solo actualizaciones importantes sobre el lanzamiento
             </p>
           </div>
@@ -680,28 +680,28 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-10 px-6 border-t border-gray-800">
+      <footer className="py-8 sm:py-10 px-4 sm:px-6 border-t border-gray-800">
         <div className="container mx-auto max-w-6xl text-center">
-          <div className="text-2xl font-bold mb-2">
+          <div className="text-xl sm:text-2xl font-bold mb-2">
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
               Forka
             </span>
           </div>
-          <p className="text-gray-500 text-sm mb-4">Innovando la experiencia gastronómica</p>
-          <div className="flex justify-center gap-6 mb-4">
+          <p className="text-gray-500 text-xs sm:text-sm mb-4">Innovando la experiencia gastronómica</p>
+          <div className="flex justify-center gap-4 sm:gap-6 mb-4">
             {/* Instagram Logo */}
             <span className="inline-block" title="Instagram">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-pink-500">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line>
+              <svg width="24" height="24" className="sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" className="text-pink-500"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" className="text-pink-500"></path>
+                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" className="text-pink-500"></line>
               </svg>
             </span>
             {/* X (Twitter) Logo */}
             <span className="inline-block" title="X">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-gray-400">
-                <path d="M17.5 6.5L6.5 17.5"></path>
-                <path d="M6.5 6.5l11 11"></path>
+              <svg width="24" height="24" className="sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M17.5 6.5L6.5 17.5" className="text-gray-400"></path>
+                <path d="M6.5 6.5l11 11" className="text-gray-400"></path>
               </svg>
             </span>
           </div>
