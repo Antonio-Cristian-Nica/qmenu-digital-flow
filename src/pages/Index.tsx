@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -17,8 +18,10 @@ import {
 } from "lucide-react";
 import SurveyForm from "@/components/SurveyForm";
 import SectionReveal from "@/components/SectionReveal";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Index = () => {
+  const { t } = useTranslation();
   const [isVisible, setIsVisible] = useState<Record<string, boolean>>({});
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isHeaderDemoOpen, setIsHeaderDemoOpen] = useState(false);
@@ -120,19 +123,22 @@ const Index = () => {
               Forka
             </span>
           </div>
-          <Dialog open={isHeaderDemoOpen} onOpenChange={handleHeaderDemoDialogChange}>
-            <DialogTrigger asChild>
-                <Button
-                  className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-700"
-                  onClick={() => handleHeaderDemoDialogChange(true)}
-                >
-                  Demo
-                </Button>
-            </DialogTrigger>
-            <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
-              <SurveyForm onSuccess={() => setIsHeaderDemoOpen(false)} />
-            </DialogContent>
-          </Dialog>
+          <div className="flex items-center gap-4">
+            <LanguageSwitcher />
+            <Dialog open={isHeaderDemoOpen} onOpenChange={handleHeaderDemoDialogChange}>
+              <DialogTrigger asChild>
+                  <Button
+                    className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-700"
+                    onClick={() => handleHeaderDemoDialogChange(true)}
+                  >
+                    {t('nav.demo')}
+                  </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                <SurveyForm onSuccess={() => setIsHeaderDemoOpen(false)} />
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </nav>
 
@@ -147,28 +153,28 @@ const Index = () => {
             <div className="space-y-6 sm:space-y-8">
               <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-3 py-1 text-xs sm:px-4 sm:py-2 sm:text-sm">
                 <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                En desarrollo: ¡próximamente!
+                {t('hero.badge')}
               </Badge>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-center">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  Transforma tu
+                  {t('hero.title1')}
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                  restaurante
+                  {t('hero.title2')}
                 </span>
               </h1>
               
               <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
-                Tus clientes piden y pagan desde la mesa.<br />
-                <span className="text-white font-medium">Solo 2% de comisión por transacción móvil.</span>
+                {t('hero.subtitle')}<br />
+                <span className="text-white font-medium">{t('hero.subtitle2')}</span>
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
                 <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
                   <DialogTrigger asChild>
                     <Button size="lg" className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-6 text-lg h-auto mx-auto">
-                      Mas Información
+                      {t('hero.cta')}
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -180,15 +186,15 @@ const Index = () => {
               <div className="flex justify-center gap-12 text-sm text-gray-500 mt-16">
                 <div className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-green-400" />
-                  Facil de instalar
+                  {t('hero.feature1')}
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-green-400" />
-                  Setup 5 min
+                  {t('hero.feature2')}
                 </div>
                 <div className="flex items-center gap-2">
                   <Check className="h-4 w-4 text-green-400" />
-                  Soporte 24/7
+                  {t('hero.feature3')}
                 </div>
               </div>
             </div>
@@ -211,11 +217,11 @@ const Index = () => {
                     </div>
                     
                     <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                      ¡Escanea y Disfruta!
+                      {t('qr.title')}
                     </h3>
                     
                     <p className="text-gray-400 mb-8 text-lg">
-                      Sin apps, sin esperas. Solo escanea el QR y comienza a pedir.
+                      {t('qr.subtitle')}
                     </p>
                     
                     {/* Demo Steps */}
@@ -224,19 +230,19 @@ const Index = () => {
                         <div className="bg-purple-500/20 rounded-xl p-4 mb-3 border border-purple-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(168,85,247,0.5)]">
                           <Smartphone className="w-8 h-8 mx-auto text-purple-400 transition-transform duration-300 group-hover:scale-125" />
                         </div>
-                        <div className="text-sm text-gray-300">Escanea QR</div>
+                        <div className="text-sm text-gray-300">{t('qr.step1')}</div>
                       </div>
                       <div className="text-center group">
                         <div className="bg-cyan-500/20 rounded-xl p-4 mb-3 border border-cyan-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(34,211,238,0.5)]">
                           <Target className="w-8 h-8 mx-auto text-cyan-400 transition-transform duration-300 group-hover:scale-125" />
                         </div>
-                        <div className="text-sm text-gray-300">Elige platos</div>
+                        <div className="text-sm text-gray-300">{t('qr.step2')}</div>
                       </div>
                       <div className="text-center group">
                         <div className="bg-green-500/20 rounded-xl p-4 mb-3 border border-green-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(34,197,94,0.5)]">
                           <CreditCard className="w-8 h-8 mx-auto text-green-400 transition-transform duration-300 group-hover:scale-125" />
                         </div>
-                        <div className="text-sm text-gray-300">Paga fácil</div>
+                        <div className="text-sm text-gray-300">{t('qr.step3')}</div>
                       </div>
                     </div>
                     
@@ -249,7 +255,7 @@ const Index = () => {
                           onClick={() => handleEscaneaDemoDialogChange(true)}
                         >
                           <Sparkles className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
-                          Únete a la Beta
+                          {t('qr.cta')}
                         </Button>
                       </DialogTrigger>
                       <DialogContent className="bg-gray-900 border-gray-800 max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
@@ -262,7 +268,7 @@ const Index = () => {
               
               {/* Floating Badge */}
               <div className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-6 py-3 rounded-full text-sm font-semibold animate-pulse shadow-lg">
-                La mejor experiencia
+                {t('qr.badge')}
               </div>
               
               {/* Bottom highlight */}
@@ -283,30 +289,30 @@ const Index = () => {
             <div className="text-center mb-20">
               <h2 className="text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  Simple para clientes
+                  {t('how.title')}
                 </span>
               </h2>
-              <p className="text-xl text-gray-400">Tres pasos. Cero fricción.</p>
+              <p className="text-xl text-gray-400">{t('how.subtitle')}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
                   step: "01",
-                  title: "Escanea",
-                  description: "QR → Menú digital instantáneo",
+                  title: t('how.step1.title'),
+                  description: t('how.step1.desc'),
                   icon: "📱"
                 },
                 {
                   step: "02", 
-                  title: "Colabora",
-                  description: "Todos añaden platos al pedido",
+                  title: t('how.step2.title'),
+                  description: t('how.step2.desc'),
                   icon: "🤝"
                 },
                 {
                   step: "03",
-                  title: "Paga", 
-                  description: "Juntos o dividido. Bizum, tarjeta, Apple Pay",
+                  title: t('how.step3.title'), 
+                  description: t('how.step3.desc'),
                   icon: "💳"
                 }
               ].map((item, index) => (
@@ -336,25 +342,25 @@ const Index = () => {
               <div>
                 <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 mb-4 sm:mb-6">
                   <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
-                  App Móvil
+                  {t('app.badge')}
                 </Badge>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
                   <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    Control total
+                    {t('app.title')}
                   </span>
                 </h2>
                 <p className="text-lg sm:text-xl text-gray-400 mb-6 sm:mb-8">
-                  Gestiona pedidos, actualiza menú, genera QR y analiza todo desde una app intuitiva.
+                  {t('app.subtitle')}
                 </p>
 
                 <div className="space-y-4">
                   {[
-                    "Pedidos en tiempo real",
-                    "Estado de platos actualizable", 
-                    "QR por mesa",
-                    "Analytics avanzados",
-                    "Gestión de pagos",
-                    "Roles de empleados"
+                    t('app.feature1'),
+                    t('app.feature2'), 
+                    t('app.feature3'),
+                    t('app.feature4'),
+                    t('app.feature5'),
+                    t('app.feature6')
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
                       <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"></div>
@@ -368,10 +374,10 @@ const Index = () => {
                 <div className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-purple-500/20">
                   <div className="grid grid-cols-2 gap-3 sm:gap-4">
                     {[
-                      { title: "Pedidos", value: "23", color: "from-purple-500 to-purple-600", shadow: "shadow-[0_0_16px_rgba(168,85,247,0.3)]" },
-                      { title: "Mesas", value: "12", color: "from-cyan-500 to-cyan-600", shadow: "shadow-[0_0_16px_rgba(34,211,238,0.3)]" },
-                      { title: "Hoy", value: "€1,234", color: "from-purple-500 to-cyan-500", shadow: "shadow-[0_0_16px_rgba(34,197,94,0.3)]" },
-                      { title: "Tiempo", value: "8min", color: "from-cyan-500 to-purple-500", shadow: "shadow-[0_0_16px_rgba(59,130,246,0.3)]" }
+                      { title: t('stats.orders'), value: "23", color: "from-purple-500 to-purple-600", shadow: "shadow-[0_0_16px_rgba(168,85,247,0.3)]" },
+                      { title: t('stats.tables'), value: "12", color: "from-cyan-500 to-cyan-600", shadow: "shadow-[0_0_16px_rgba(34,211,238,0.3)]" },
+                      { title: t('stats.today'), value: "€1,234", color: "from-purple-500 to-cyan-500", shadow: "shadow-[0_0_16px_rgba(34,197,94,0.3)]" },
+                      { title: t('stats.time'), value: "8min", color: "from-cyan-500 to-purple-500", shadow: "shadow-[0_0_16px_rgba(59,130,246,0.3)]" }
                     ].map((stat, index) => (
                       <div key={index} className="bg-gray-900/80 rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 border border-gray-800 group transition-all duration-300 hover:border-purple-500/30 hover:-translate-y-1 text-left">
                         <div className={`w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gradient-to-r ${stat.color} rounded-md sm:rounded-lg mb-2 sm:mb-3 flex items-center justify-start transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse group-hover:${stat.shadow}`}></div>
@@ -386,7 +392,7 @@ const Index = () => {
 
             {/* App Store & Google Play Badges - Próximamente */}
             <div className="w-full flex flex-col items-center justify-center py-6 sm:py-8 lg:py-10">
-              <span className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 text-center px-4">Próximamente disponible en App Store y Google Play</span>
+              <span className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 text-center px-4">{t('app.stores')}</span>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
                 {/* App Store badge */}
                 <a href="#" className="overflow-hidden rounded-lg shadow-lg" tabIndex={-1} aria-disabled>
@@ -427,11 +433,11 @@ const Index = () => {
             <div className="text-center mb-20">
               <Badge className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-purple-300 border-purple-500/30 mb-6">
                 <Target className="w-4 h-4 mr-2" />
-                Inteligencia Artificial
+                {t('ai.badge')}
               </Badge>
               <h2 className="text-5xl font-bold mb-6">
                 <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  IA que trabaja para ti
+                  {t('ai.title')}
                 </span>
               </h2>
             </div>
@@ -440,18 +446,18 @@ const Index = () => {
               {[
                 {
                   icon: "📸",
-                  title: "Lectura de Menús",
-                  description: "Sube una foto y la IA extrae platos, ingredientes y alérgenos automáticamente"
+                  title: t('ai.feature1.title'),
+                  description: t('ai.feature1.desc')
                 },
                 {
                   icon: "🔍",
-                  title: "Filtros Inteligentes", 
-                  description: "Filtrado por alergias, dietas veganas, sin gluten y preferencias personales"
+                  title: t('ai.feature2.title'), 
+                  description: t('ai.feature2.desc')
                 },
                 {
                   icon: "📊",
-                  title: "Analytics Predictivos",
-                  description: "Platos populares, tiempos de espera y optimización de rendimiento"
+                  title: t('ai.feature3.title'),
+                  description: t('ai.feature3.desc')
                 }
               ].map((feature, index) => (
                 <Card key={index} className="group bg-gray-900/30 border-gray-800 hover:border-purple-500/30 transition-all duration-300 hover:bg-gray-900/50">
@@ -477,7 +483,7 @@ const Index = () => {
           className={`py-16 px-6`}
         >
           <div className="container mx-auto max-w-4xl text-center">
-            <h3 className="text-2xl font-bold mb-8 text-white">Tecnología de vanguardia</h3>
+            <h3 className="text-2xl font-bold mb-8 text-white">{t('tech.title')}</h3>
             <div className="flex flex-wrap justify-center gap-6 items-center">
               {[
                 "Next.js", "React Native", "NestJS", "PostgreSQL", 
@@ -549,7 +555,7 @@ const Index = () => {
           <div className="text-center mb-20">
             <h2 className="text-5xl font-bold mb-6">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                Restaurantes que confían
+                {t('testimonials.title')}
               </span>
             </h2>
           </div>
@@ -557,21 +563,21 @@ const Index = () => {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
-                name: "María González",
-                role: "Propietaria, Tapas & Co",
-                content: "Reducimos 40% el tiempo de pedido. Los clientes están encantados.",
+                name: t('testimonials.1.name'),
+                role: t('testimonials.1.role'),
+                content: t('testimonials.1.content'),
                 rating: 5
               },
               {
-                name: "Carlos Ruiz", 
-                role: "Gerente, Bistro Moderno",
-                content: "La IA digitalizó nuestro menú en 5 minutos. Increíble.",
+                name: t('testimonials.2.name'), 
+                role: t('testimonials.2.role'),
+                content: t('testimonials.2.content'),
                 rating: 5
               },
               {
-                name: "Ana Martín",
-                role: "Chef, El Rincón Verde", 
-                content: "Perfecto para filtrar platos veganos. Clientes más seguros.",
+                name: t('testimonials.3.name'),
+                role: t('testimonials.3.role'), 
+                content: t('testimonials.3.content'),
                 rating: 5
               }
             ].map((testimonial, index) => (
@@ -606,7 +612,7 @@ const Index = () => {
           <div className="text-center mb-12 sm:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                FAQ
+                {t('faq.title')}
               </span>
             </h2>
           </div>
@@ -614,20 +620,20 @@ const Index = () => {
           <div className="space-y-4 sm:space-y-6">
             {[
               {
-                q: "¿Cuánto cuesta?",
-                a: "Solo 2% por pago móvil. Si pagan en caja, gratis. Sin setup ni mensualidades."
+                q: t('faq.q1'),
+                a: t('faq.a1')
               },
               {
-                q: "¿Cuánto tarda la implementación?",
-                a: "Setup en 5 minutos. Te ayudamos con menú y configuración de mesas."
+                q: t('faq.q2'),
+                a: t('faq.a2')
               },
               {
-                q: "¿Los clientes necesitan una app?",
-                a: "No. Solo escanean el QR y acceden a la web app. Sin descargas."
+                q: t('faq.q3'),
+                a: t('faq.a3')
               },
               {
-                q: "¿Funciona sin internet?",
-                a: "Modo offline básico para pedidos. Se sincroniza al reconectar."
+                q: t('faq.q4'),
+                a: t('faq.a4')
               }
             ].map((faq, index) => (
               <Card key={index} className="bg-gray-900/30 border-gray-800 hover:border-purple-500/30 transition-all duration-300">
@@ -653,11 +659,11 @@ const Index = () => {
           <div className="bg-gradient-to-br from-purple-900/50 to-cyan-900/50 rounded-2xl sm:rounded-3xl p-6 sm:p-12 border border-purple-500/20 backdrop-blur-sm">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
               <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                ¿Listo para revolucionar?
+                {t('cta.title')}
               </span>
             </h2>
             <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-12 px-4 sm:px-0">
-              Únete a la beta y transforma tu restaurante
+              {t('cta.subtitle')}
             </p>
 
             <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
@@ -666,7 +672,7 @@ const Index = () => {
                   size="lg" 
                   className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 font-semibold px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto"
                 >
-                  Acceso Beta Gratuito
+                  {t('cta.button')}
                 </Button>
               </DialogTrigger>
               <DialogContent className="bg-gray-900 border-gray-800 max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
@@ -675,7 +681,7 @@ const Index = () => {
             </Dialog>
             
             <p className="text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6 px-4 sm:px-0">
-              Solo actualizaciones importantes sobre el lanzamiento
+              {t('cta.disclaimer')}
             </p>
           </div>
         </div>
@@ -689,7 +695,7 @@ const Index = () => {
               Forka
             </span>
           </div>
-          <p className="text-gray-500 text-xs sm:text-sm mb-4">Innovando la experiencia gastronómica</p>
+          <p className="text-gray-500 text-xs sm:text-sm mb-4">{t('footer.tagline')}</p>
           <div className="flex justify-center gap-4 sm:gap-6 mb-4">
             {/* Instagram Logo */}
             <span className="inline-block" title="Instagram">
