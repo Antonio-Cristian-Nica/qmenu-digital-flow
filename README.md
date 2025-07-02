@@ -1,3 +1,58 @@
+# 📋 Forka - Digital Restaurant Flow
+
+Landing page profesional para Forka con formulario integrado que envía datos directamente a Google Sheets usando **SheetDB**.
+
+## 🚀 Configuración Rápida (2 minutos)
+
+### 1. Instalar dependencias
+```bash
+npm install
+```
+
+### 2. Configurar SheetDB
+1. Ve a https://sheetdb.io y regístrate gratis
+2. Conecta tu Google Sheets: `https://docs.google.com/spreadsheets/d/1ewzzbgjD7z0NJOOiqBGibDCSk_xK-rt3JYBkpjeNIng/edit`
+3. Copia tu API URL de SheetDB
+4. Pégala en `.env`:
+```env
+VITE_SHEETDB_API_URL=https://sheetdb.io/api/v1/TU_API_ID
+```
+
+### 3. Ejecutar
+```bash
+npm run dev
+```
+
+¡Ya funciona! Los formularios se envían automáticamente a tu Google Sheets.
+
+## 📁 Archivos importantes
+
+- `SHEETDB-SETUP.md` - Configuración detallada de SheetDB
+- `.env` - Variables de entorno (configura tu API)
+- `src/services/api.ts` - Integración con SheetDB
+
+## ✅ Características
+
+- ✅ Formulario responsive
+- ✅ Envío a Google Sheets en tiempo real
+- ✅ Sistema de backup local
+- ✅ Retry automático
+- ✅ Debug completo en consola
+- ✅ Sin configuración compleja
+
+## 🔧 Métodos de envío
+
+1. **SheetDB** (Principal) - API REST simple
+2. **API Custom** (Opcional) - Tu backend
+3. **Google Apps Script** (Backup) - Método alternativo
+
+## 🎯 URLs importantes
+
+- **SheetDB**: https://sheetdb.io
+- **Tu Google Sheets**: https://docs.google.com/spreadsheets/d/1ewzzbgjD7z0NJOOiqBGibDCSk_xK-rt3JYBkpjeNIng/edit
+
+---
+
 # Welcome to your Lovable project
 
 ## Project info
