@@ -144,9 +144,9 @@ const Index = () => {
           className={`pt-32 pb-20 px-6`}
         >
           <div className="container mx-auto max-w-6xl text-center">
-            <div className="space-y-8">
-              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-4 py-2">
-                <Sparkles className="w-4 h-4 mr-2" />
+            <div className="space-y-6 sm:space-y-8">
+              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-3 py-1 text-xs sm:px-4 sm:py-2 sm:text-sm">
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                 En desarrollo: ¡próximamente!
               </Badge>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-center">
@@ -159,7 +159,7 @@ const Index = () => {
                 </span>
               </h1>
               
-              <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
                 Tus clientes piden y pagan desde la mesa.<br />
                 <span className="text-white font-medium">Solo 2% de comisión por transacción móvil.</span>
               </p>
