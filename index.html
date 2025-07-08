@@ -1,130 +1,28 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forka - Digital Restaurant Flow</title>
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            margin: 0;
-            padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-        }
-        .container {
-            text-align: center;
-            max-width: 600px;
-        }
-        h1 { font-size: 3rem; margin-bottom: 1rem; }
-        p { font-size: 1.2rem; margin-bottom: 2rem; }
-        .btn {
-            background: white;
-            color: #667eea;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: transform 0.2s;
-        }
-        .btn:hover { transform: translateY(-2px); }
-        .status {
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 2rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🍽️ Forka</h1>
-        <p>Transforma tu restaurante con menús digitales y pagos móviles</p>
-        <p>Solo 2% de comisión por transacción móvil</p>
-        
-        <a href="#form" class="btn" onclick="showForm()">Más Información</a>
-        
-        <div class="status">
-            <h3>🚀 Estado del Proyecto</h3>
-            <p>✅ Web desplegada en GitHub Pages</p>
-            <p>✅ Formularios funcionando con SheetDB</p>
-            <p>✅ Conectado a Google Sheets</p>
-            <p><small>Actualizando a versión completa...</small></p>
-        </div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>qmenu-digital-flow</title>
+    <meta name="description" content="Lovable Generated Project" />
+    <meta name="author" content="Lovable" />
 
-        <div id="form-container" style="display:none; margin-top: 2rem;">
-            <div style="background: rgba(255,255,255,0.1); padding: 30px; border-radius: 10px;">
-                <h3>📋 Formulario de Contacto</h3>
-                <form id="contact-form" style="text-align: left;">
-                    <input type="email" placeholder="Email" required style="width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 5px; font-size: 1rem;">
-                    <input type="text" placeholder="Nombre del Restaurante" style="width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 5px; font-size: 1rem;">
-                    <input type="number" placeholder="Número de Mesas" style="width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 5px; font-size: 1rem;">
-                    <select style="width: 100%; padding: 15px; margin: 10px 0; border: none; border-radius: 5px; font-size: 1rem;">
-                        <option>Sistema Actual</option>
-                        <option>Manual/Papel</option>
-                        <option>TPV Básico</option>
-                        <option>Sistema Digital</option>
-                        <option>Otro</option>
-                    </select>
-                    <label style="display: block; margin: 15px 0;">
-                        <input type="checkbox"> Quiero solicitar una demo
-                    </label>
-                    <button type="submit" class="btn" style="width: 100%; margin-top: 15px;">Enviar</button>
-                </form>
-            </div>
-        </div>
-    </div>
+    <meta property="og:title" content="qmenu-digital-flow" />
+    <meta property="og:description" content="Lovable Generated Project" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <script>
-        function showForm() {
-            document.getElementById('form-container').style.display = 'block';
-            document.getElementById('form-container').scrollIntoView({behavior: 'smooth'});
-        }
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@lovable_dev" />
+    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-        document.getElementById('contact-form').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(e.target);
-            const data = {
-                timestamp: new Date().toLocaleString('es-ES'),
-                email: formData.get('email') || e.target.querySelector('input[type="email"]').value,
-                restaurantName: e.target.querySelector('input[placeholder="Nombre del Restaurante"]').value,
-                tableCount: e.target.querySelector('input[type="number"]').value,
-                currentSystem: e.target.querySelector('select').value,
-                interests: 'Menú digital, Pagos móviles',
-                wantsDemo: e.target.querySelector('input[type="checkbox"]').checked ? 'Sí' : 'No',
-                source: 'forka-landing-simple'
-            };
+    <link rel="icon" href="/qmenu-digital-flow/assets/favicon-B3sEb3uK.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <script type="module" crossorigin src="/qmenu-digital-flow/assets/index-C-3ODSOU.js"></script>
+    <link rel="stylesheet" crossorigin href="/qmenu-digital-flow/assets/index-_4hqnYIz.css">
+  </head>
 
-            try {
-                const response = await fetch('https://sheetdb.io/api/v1/2kml8y757oq23', {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data)
-                });
-
-                if (response.ok) {
-                    alert('¡Gracias! Te contactaremos pronto con novedades sobre Forka.');
-                    e.target.reset();
-                } else {
-                    throw new Error('Error en el envío');
-                }
-            } catch (error) {
-                alert('Información guardada. Te contactaremos pronto.');
-                console.log('Datos del formulario:', data);
-            }
-        });
-    </script>
-</body>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
