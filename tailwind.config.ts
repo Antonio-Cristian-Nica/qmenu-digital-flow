@@ -19,14 +19,14 @@ export default {
 		},
 		extend: {
 			colors: {
-				border: 'hsl(var(--border))',
-				input: 'hsl(var(--input))',
-				ring: 'hsl(var(--ring))',
-				background: 'hsl(var(--background))',
-				foreground: 'hsl(var(--foreground))',
+				border: '#1E3A8A',
+				input: '#FEF3C7',
+				ring: '#2563EB',
+				background: '#FEF3C7',
+				foreground: '#1E3A8A',
 				primary: {
-					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					DEFAULT: '#2563EB',
+					foreground: '#FEF3C7'
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -41,8 +41,8 @@ export default {
 					foreground: 'hsl(var(--muted-foreground))'
 				},
 				accent: {
-					DEFAULT: 'hsl(var(--accent))',
-					foreground: 'hsl(var(--accent-foreground))'
+					DEFAULT: 'linear-gradient(to right, #2563EB, #7C3AED)',
+					foreground: '#FEF3C7'
 				},
 				popover: {
 					DEFAULT: 'hsl(var(--popover))',
@@ -63,10 +63,23 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
+			fontFamily: {
+				retro: ['"Fredoka One"', 'sans-serif']
+			},
 			borderRadius: {
+				DEFAULT: '4px',
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			borderWidth: {
+				DEFAULT: '2px'
+			},
+			boxShadow: {
+				retro: '4px 4px 0px #1E3A8A'
+			},
+			strokeWidth: {
+				DEFAULT: '4px'
 			},
 			keyframes: {
 				'accordion-down': {
