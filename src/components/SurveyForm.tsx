@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useSurvey } from '@/hooks/useSurvey';
+import { trackGAEvent } from '@/hooks/useGoogleAnalytics';
 
 interface SurveyFormProps {
   onSuccess?: () => void;
@@ -46,6 +47,15 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ onSuccess }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Trackear evento de envío de formulario
+    trackGAEvent('form_submit', {
+      form_name: 'survey_form',
+      has_restaurant_name: !!formData.restaurantName,
+      has_table_count: !!formData.tableCount,
+      interests_count: formData.interests.length,
+      wants_demo: formData.wantsDemo
+    });
+    
     const success = await submitSurvey({
       email: formData.email,
       restaurantName: formData.restaurantName || undefined,
@@ -56,6 +66,12 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ onSuccess }) => {
     });
 
     if (success) {
+      // Trackear evento de éxito
+      trackGAEvent('form_success', {
+        form_name: 'survey_form',
+        conversion_type: 'lead'
+      });
+      
       setFormData({
         email: '',
         restaurantName: '',
@@ -65,6 +81,12 @@ const SurveyForm: React.FC<SurveyFormProps> = ({ onSuccess }) => {
         wantsDemo: false
       });
       onSuccess?.();
+    } else {
+      // Trackear evento de error
+      trackGAEvent('form_error', {
+        form_name: 'survey_form',
+        error_type: 'submission_failed'
+      });
     }
   };
 

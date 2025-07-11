@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { trackButtonClick } from '@/hooks/useGoogleAnalytics';
 
 import { 
   ArrowDown, 
@@ -130,7 +131,10 @@ const Index = () => {
               <DialogTrigger asChild>
                   <Button
                     className="btn"
-                    onClick={() => handleHeaderDemoDialogChange(true)}
+                    onClick={() => {
+                      trackButtonClick('demo_header', 'navigation');
+                      handleHeaderDemoDialogChange(true);
+                    }}
                   >
                     {t('nav.demo')}
                   </Button>
@@ -175,7 +179,11 @@ const Index = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
                 <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
                   <DialogTrigger asChild>
-                    <Button size="lg" className="btn text-lg h-auto mx-auto">
+                    <Button 
+                      size="lg" 
+                      className="btn text-lg h-auto mx-auto"
+                      onClick={() => trackButtonClick('cta_hero', 'hero')}
+                    >
                       {t('hero.cta')}
                     </Button>
                   </DialogTrigger>
@@ -254,7 +262,10 @@ const Index = () => {
                         <Button 
                           size="lg" 
                           className="btn px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-sm sm:text-base lg:text-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
-                          onClick={() => handleEscaneaDemoDialogChange(true)}
+                          onClick={() => {
+                            trackButtonClick('qr_demo', 'qr_section');
+                            handleEscaneaDemoDialogChange(true);
+                          }}
                         >
                           <Sparkles className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                           {t('qr.cta')}
@@ -662,6 +673,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   className="btn px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto"
+                  onClick={() => trackButtonClick('cta_final', 'cta_section')}
                 >
                   {t('cta.button')}
                 </Button>
