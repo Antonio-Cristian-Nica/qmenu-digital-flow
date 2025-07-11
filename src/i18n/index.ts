@@ -14,7 +14,7 @@ const resources = {
       "hero.title1": "Transforma tu",
       "hero.title2": "restaurante",
       "hero.subtitle": "Tus clientes piden y pagan desde la mesa.",
-      "hero.subtitle2": "Solo 2% de comisión por transacción móvil.",
+      "hero.subtitle2": "Solo 0,65% de comisión por transacción móvil.",
       "hero.cta": "Mas Información",
       "hero.feature1": "Facil de instalar",
       "hero.feature2": "Setup 5 min",
@@ -60,7 +60,7 @@ const resources = {
       // FAQ
       "faq.title": "FAQ",
       "faq.q1": "¿Cuánto cuesta?",
-      "faq.a1": "Solo 2% por pago móvil. Si pagan en caja, gratis. Sin setup ni mensualidades.",
+      "faq.a1": "Solo 0,65% por pago móvil. Si pagan en caja, gratis. Setup súper fácil y 1€ primer mes, luego 10€/mes.",
       "faq.q2": "¿Cuánto tarda la implementación?",
       "faq.a2": "Setup en 5 minutos. Te ayudamos con menú y configuración de mesas.",
       "faq.q3": "¿Los clientes necesitan una app?",
@@ -118,7 +118,7 @@ const resources = {
       
       // Subscription
       "subscription.title": "Suscripción Premium:",
-      "subscription.price": "79,99 €/mes",
+      "subscription.price": "1€ primer mes, luego 10€/mes",
       "subscription.feature1.title": "Menú Digital IA:",
       "subscription.feature1.desc": "OCR + IA extrae platos, ingredientes y alérgenos desde foto; edición y organización manual.",
       "subscription.feature2.title": "Pedidos & Pagos QR:",
@@ -157,7 +157,7 @@ const resources = {
       "hero.title1": "Transform your",
       "hero.title2": "restaurant",
       "hero.subtitle": "Your customers order and pay from their table.",
-      "hero.subtitle2": "Only 2% commission per mobile transaction.",
+      "hero.subtitle2": "Only 0.65% commission per mobile transaction.",
       "hero.cta": "More Information",
       "hero.feature1": "Easy to install",
       "hero.feature2": "5 min setup",
@@ -203,7 +203,7 @@ const resources = {
       // FAQ
       "faq.title": "FAQ",
       "faq.q1": "How much does it cost?",
-      "faq.a1": "Only 2% per mobile payment. If they pay at counter, it's free. No setup or monthly fees.",
+      "faq.a1": "Only 0.65% per mobile payment. If they pay at counter, it's free. Super easy setup and €1 first month, then €10/month.",
       "faq.q2": "How long does implementation take?",
       "faq.a2": "5-minute setup. We help you with menu and table configuration.",
       "faq.q3": "Do customers need an app?",
@@ -261,7 +261,7 @@ const resources = {
       
       // Subscription
       "subscription.title": "Premium Subscription:",
-      "subscription.price": "€79.99/month",
+      "subscription.price": "€1 first month, then €10/month",
       "subscription.feature1.title": "AI Digital Menu:",
       "subscription.feature1.desc": "OCR + AI extracts dishes, ingredients and allergens from photo; manual editing and organization.",
       "subscription.feature2.title": "QR Orders & Payments:",
@@ -300,7 +300,7 @@ const resources = {
       "hero.title1": "Transformă-ți",
       "hero.title2": "restaurantul",
       "hero.subtitle": "Clienții tăi comandă și plătesc de la masă.",
-      "hero.subtitle2": "Doar 2% comision per tranzacție mobilă.",
+      "hero.subtitle2": "Doar 0,65% comision per tranzacție mobilă.",
       "hero.cta": "Mai multe informații",
       "hero.feature1": "Ușor de instalat",
       "hero.feature2": "Configurare 5 min",
@@ -346,7 +346,7 @@ const resources = {
       // FAQ
       "faq.title": "Întrebări frecvente",
       "faq.q1": "Cât costă?",
-      "faq.a1": "Doar 2% per plată mobilă. Dacă plătesc la casă, gratis. Fără configurare sau taxe lunare.",
+      "faq.a1": "Doar 0,65% per plată mobilă. Dacă plătesc la casă, gratis. Configurare super ușoară și 1€ prima lună, apoi 10€/lună.",
       "faq.q2": "Cât durează implementarea?",
       "faq.a2": "Configurare în 5 minute. Te ajutăm cu meniul și configurarea meselor.",
       "faq.q3": "Clienții au nevoie de o aplicație?",
@@ -404,7 +404,7 @@ const resources = {
       
       // Subscription
       "subscription.title": "Abonament Premium:",
-      "subscription.price": "79,99 €/lună",
+      "subscription.price": "1€ prima lună, apoi 10€/lună",
       "subscription.feature1.title": "Meniu Digital AI:",
       "subscription.feature1.desc": "OCR + AI extrage mâncăruri, ingrediente și alergeni din poză; editare și organizare manuală.",
       "subscription.feature2.title": "Comenzi & Plăți QR:",
@@ -443,7 +443,7 @@ const resources = {
       "hero.title1": "Transformez votre",
       "hero.title2": "restaurant",
       "hero.subtitle": "Vos clients commandent et paient depuis leur table.",
-      "hero.subtitle2": "Seulement 2% de commission par transaction mobile.",
+      "hero.subtitle2": "Seulement 0,65% de commission par transaction mobile.",
       "hero.cta": "Plus d'informations",
       "hero.feature1": "Facile à installer",
       "hero.feature2": "Configuration 5 min",
@@ -489,7 +489,7 @@ const resources = {
       // FAQ
       "faq.title": "FAQ",
       "faq.q1": "Combien ça coûte ?",
-      "faq.a1": "Seulement 2% par paiement mobile. S'ils paient au comptoir, c'est gratuit. Pas de configuration ni de frais mensuels.",
+      "faq.a1": "Seulement 0,65% par paiement mobile. S'ils paient au comptoir, c'est gratuit. Configuration super facile et 1€ le premier mois, puis 10€/mois.",
       "faq.q2": "Combien de temps prend l'implémentation ?",
       "faq.a2": "Configuration en 5 minutes. Nous vous aidons avec le menu et la configuration des tables.",
       "faq.q3": "Les clients ont-ils besoin d'une application ?",
@@ -547,7 +547,7 @@ const resources = {
       
       // Subscription
       "subscription.title": "Abonnement Premium :",
-      "subscription.price": "79,99 €/mois",
+      "subscription.price": "1€ le premier mois, puis 10€/mois",
       "subscription.feature1.title": "Menu Numérique IA :",
       "subscription.feature1.desc": "OCR + IA extrait plats, ingrédients et allergènes depuis photo ; édition et organisation manuelle.",
       "subscription.feature2.title": "Commandes & Paiements QR :",
@@ -586,7 +586,7 @@ const resources = {
       "hero.title1": "Trasforma il tuo",
       "hero.title2": "ristorante",
       "hero.subtitle": "I tuoi clienti ordinano e pagano dal tavolo.",
-      "hero.subtitle2": "Solo 2% di commissione per transazione mobile.",
+      "hero.subtitle2": "Solo 0,65% di commissione per transazione mobile.",
       "hero.cta": "Maggiori informazioni",
       "hero.feature1": "Facile da installare",
       "hero.feature2": "Setup 5 min",
@@ -632,7 +632,7 @@ const resources = {
       // FAQ
       "faq.title": "FAQ",
       "faq.q1": "Quanto costa?",
-      "faq.a1": "Solo 2% per pagamento mobile. Se pagano alla cassa, è gratis. Nessun setup o costi mensili.",
+      "faq.a1": "Solo 0,65% per pagamento mobile. Se pagano alla cassa, è gratis. Setup super facile e 1€ primo mese, poi 10€/mese.",
       "faq.q2": "Quanto tempo richiede l'implementazione?",
       "faq.a2": "Setup in 5 minuti. Ti aiutiamo con menu e configurazione tavoli.",
       "faq.q3": "I clienti hanno bisogno di un'app?",
@@ -690,7 +690,7 @@ const resources = {
       
       // Subscription
       "subscription.title": "Abbonamento Premium:",
-      "subscription.price": "79,99 €/mese",
+      "subscription.price": "1€ primo mese, poi 10€/mese",
       "subscription.feature1.title": "Menu Digitale IA:",
       "subscription.feature1.desc": "OCR + IA estrae piatti, ingredienti e allergeni da foto; editing e organizzazione manuale.",
       "subscription.feature2.title": "Ordini & Pagamenti QR:",

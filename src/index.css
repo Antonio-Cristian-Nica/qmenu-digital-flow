@@ -1,72 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Forka Brand Design System */
 @layer base {
   :root {
-    --background: 40 100% 90%; /* Light beige */
-    --foreground: 220 80% 20%; /* Bold blue */
-
-    --primary: 220 80% 50%; /* Bold blue */
-    --primary-foreground: 40 100% 90%; /* Light beige */
-
-    --accent: 220 80% 50%; /* Blue */
-    --accent-foreground: 40 100% 90%; /* Light beige */
-
+    /* Forka Brand Colors */
+    --color-bg: #FEF7E0;
+    --color-primary: #2563EB;
+    --color-accent: linear-gradient(90deg, #2563EB, #7C3AED);
+    --color-border: #1E40AF;
+    --color-text: #333333;
+    --color-text-white: #FFFFFF;
+    
+    /* Typography */
+    --font-heading: "Poppins", sans-serif;
+    --font-body: "Inter", sans-serif;
+    
+    /* Spacing & Shapes */
+    --base-spacing: 1rem;
+    --border-radius: 4px;
+    --shadow-forka: 0 4px 0 var(--color-border);
+    
+    /* Shadcn compatibility */
+    --background: 47 97% 91%; /* #FEF7E0 in HSL */
+    --foreground: 0 0% 20%; /* #333333 in HSL */
+    --primary: 217 91% 60%; /* #2563EB in HSL */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF in HSL */
+    --card: 0 0% 100%; /* #FFFFFF in HSL */
+    --card-foreground: 0 0% 20%; /* #333333 in HSL */
+    --border: 220 100% 40%; /* #1E40AF in HSL */
+    --input: 0 0% 100%; /* #FFFFFF in HSL */
+    --ring: 217 91% 60%; /* #2563EB in HSL */
     --radius: 4px;
-    --border-width: 2px;
-    --box-shadow: 4px 4px 0px hsl(220 80% 20%); /* Retro drop-shadow */
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
+    
+    --secondary: 220 14.3% 95.9%;
+    --secondary-foreground: 220.9 39.3% 11%;
+    --muted: 220 14.3% 95.9%;
+    --muted-foreground: 220 8.9% 46.1%;
+    --accent: 220 14.3% 95.9%;
+    --accent-foreground: 220.9 39.3% 11%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-bg font-body text-text;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold text-primary uppercase;
+    letter-spacing: 0.025em;
+  }
+}
+
+@layer components {
+  /* Forka Component Styles */
+  .btn {
+    @apply bg-primary text-white px-6 py-3 rounded-forka shadow-forka uppercase font-heading font-bold;
+    @apply hover:shadow-forka-hover transition-all duration-200;
+    letter-spacing: 0.015em;
+  }
+
+  .card {
+    @apply bg-white p-6 rounded-forka shadow-forka;
+  }
+
+  .input {
+    @apply border-2 border-primary rounded-forka px-3 py-2 font-body;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary;
+  }
+
+  .link {
+    @apply text-primary no-underline hover:underline;
+  }
+
+  /* Accent gradient backgrounds */
+  .accent-gradient {
+    background: linear-gradient(90deg, #2563EB, #7C3AED);
+    @apply text-white;
+  }
+
+  /* Shadow variations */
+  .shadow-forka-hover {
+    box-shadow: 0 6px 0 var(--color-border), 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Letter spacing overrides for better typography */
+  .heading-normal {
+    letter-spacing: 0.015em;
+  }
+
+  .text-normal {
+    letter-spacing: 0.005em;
+  }
+
+  /* Responsive pricing text utilities */
+  .pricing-text {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    line-height: 1.2;
+  }
+
+  .pricing-text-responsive {
+    font-size: clamp(1.25rem, 4vw, 3rem);
+    line-height: 1.1;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Ensure pricing text doesn't overflow on very small screens */
+  @media (max-width: 320px) {
+    .pricing-text-responsive {
+      font-size: 1.1rem;
+      line-height: 1.2;
+    }
+  }
+
+  /* Handle very long subscription titles in different languages */
+  @media (max-width: 480px) {
+    .subscription-title {
+      font-size: 1.5rem;
+      line-height: 1.3;
+    }
   }
 }

@@ -32,18 +32,18 @@ const LanguageSwitcher: React.FC = () => {
         <Button
           variant="ghost"
           size="sm"
-          className="h-8 w-8 p-0 text-gray-400 hover:text-white hover:bg-gray-800"
+          className="h-8 w-8 p-0 text-primary hover:text-white hover:bg-primary rounded-forka"
         >
           <Globe className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-gray-900 border-gray-700">
+      <DropdownMenuContent align="end" className="bg-white border-2 border-primary shadow-forka">
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
             onClick={() => changeLanguage(language.code)}
-            className={`cursor-pointer hover:bg-gray-800 text-gray-300 hover:text-white ${
-              currentLanguage.code === language.code ? 'bg-gray-800 text-white' : ''
+            className={`cursor-pointer hover:bg-primary/10 text-text hover:text-primary font-body ${
+              currentLanguage.code === language.code ? 'bg-primary/20 text-primary font-bold' : ''
             }`}
           >
             <span className="mr-2">{language.flag}</span>

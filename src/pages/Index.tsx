@@ -114,12 +114,13 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white">
+    <div className="min-h-screen bg-bg text-text">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-gray-950/80 backdrop-blur-xl z-50 border-b border-gray-800">
+      <nav className="fixed top-0 w-full bg-white border-b-2 border-primary z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <div className="text-2xl font-bold">
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+          <div className="flex items-center gap-3">
+            <img src="/forka-logo.svg" alt="Forka Logo" className="w-8 h-8" />
+            <span className="text-2xl font-heading font-bold text-primary uppercase heading-normal">
               Forka
             </span>
           </div>
@@ -128,13 +129,13 @@ const Index = () => {
             <Dialog open={isHeaderDemoOpen} onOpenChange={handleHeaderDemoDialogChange}>
               <DialogTrigger asChild>
                   <Button
-                    className="bg-gray-900 text-white hover:bg-gray-800 border border-gray-700"
+                    className="btn"
                     onClick={() => handleHeaderDemoDialogChange(true)}
                   >
                     {t('nav.demo')}
                   </Button>
               </DialogTrigger>
-              <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+              <DialogContent className="bg-white border-2 border-primary max-w-2xl max-h-[90vh] overflow-y-auto shadow-forka">
                 <SurveyForm onSuccess={() => setIsHeaderDemoOpen(false)} />
               </DialogContent>
             </Dialog>
@@ -151,49 +152,50 @@ const Index = () => {
         >
           <div className="container mx-auto max-w-6xl text-center">
             <div className="space-y-6 sm:space-y-8">
-              <Badge className="bg-purple-500/20 text-purple-300 border-purple-500/30 px-3 py-1 text-xs sm:px-4 sm:py-2 sm:text-sm">
+              <Badge className="bg-primary/20 text-primary border-primary/30 px-3 py-1 text-xs sm:px-4 sm:py-2 sm:text-sm uppercase font-heading text-normal">
                 <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                 {t('hero.badge')}
               </Badge>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight text-center">
-                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  {t('hero.title1')}
-                </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-tight text-center text-primary uppercase heading-normal">
+                <div className="flex items-center justify-center gap-4 mb-6">
+                  <img src="/forky-mascot.svg" alt="Forky Mascot" className="w-24 h-24 sm:w-32 sm:h-32 lg:w-40 lg:h-40" />
+                </div>
+                {t('hero.title1')}
                 <br />
-                <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="accent-gradient bg-clip-text text-transparent">
                   {t('hero.title2')}
                 </span>
               </h1>
               
-              <p className="text-base sm:text-lg lg:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-4 sm:px-0">
+              <p className="text-base sm:text-lg lg:text-xl text-text max-w-2xl mx-auto leading-relaxed px-4 sm:px-0 font-body text-normal">
                 {t('hero.subtitle')}<br />
-                <span className="text-white font-medium">{t('hero.subtitle2')}</span>
+                <span className="text-primary font-medium">{t('hero.subtitle2')}</span>
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center mt-12">
                 <Dialog open={isDialogOpen} onOpenChange={handleDialogChange}>
                   <DialogTrigger asChild>
-                    <Button size="lg" className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-8 py-6 text-lg h-auto mx-auto">
+                    <Button size="lg" className="btn text-lg h-auto mx-auto">
                       {t('hero.cta')}
                     </Button>
                   </DialogTrigger>
-                  <DialogContent className="bg-gray-900 border-gray-800 max-w-2xl max-h-[90vh] overflow-y-auto">
+                  <DialogContent className="bg-white border-2 border-primary max-w-2xl max-h-[90vh] overflow-y-auto shadow-forka">
                     <SurveyForm onSuccess={handleSurveySuccess} />
                   </DialogContent>
                 </Dialog>
               </div>
 
-              <div className="flex justify-center gap-12 text-sm text-gray-500 mt-16">
+              <div className="flex justify-center gap-12 text-sm text-text/70 mt-16 font-body text-normal">
                 <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-green-400" />
+                  <Check className="h-4 w-4 text-primary" />
                   {t('hero.feature1')}
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-green-400" />
+                  <Check className="h-4 w-4 text-primary" />
                   {t('hero.feature2')}
                 </div>
                 <div className="flex items-center gap-2">
-                  <Check className="h-4 w-4 text-green-400" />
+                  <Check className="h-4 w-4 text-primary" />
                   {t('hero.feature3')}
                 </div>
               </div>
@@ -201,48 +203,48 @@ const Index = () => {
 
             {/* Hero Visual - Updated CTA Style */}
             <div className="mt-20 relative">
-              <div className="bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-3xl p-1 backdrop-blur-sm border border-purple-500/30 shadow-2xl">
-                <div className="bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 rounded-3xl p-12 relative overflow-hidden">
+              <div className="bg-primary/10 border-2 border-primary/30 rounded-forka p-6 shadow-forka">
+                <div className="bg-white rounded-forka p-12 relative overflow-hidden border-2 border-primary/20">
                   {/* Background Pattern */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-cyan-500/5"></div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-purple-500/10 to-transparent rounded-full blur-3xl"></div>
-                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-cyan-500/10 to-transparent rounded-full blur-3xl"></div>
+                  <div className="absolute inset-0 bg-primary/5"></div>
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
+                  <div className="absolute bottom-0 left-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl"></div>
                   
                   {/* Content */}
                   <div className="relative z-10">
                     <div className="flex justify-center mb-8">
-                      <div className="bg-gradient-to-r from-purple-600 to-cyan-600 p-4 rounded-2xl">
+                      <div className="accent-gradient p-4 rounded-forka shadow-forka">
                         <QrCode className="w-12 h-12 text-white" />
                       </div>
                     </div>
                     
-                    <h3 className="text-3xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                    <h3 className="text-3xl font-heading font-bold mb-4 text-primary uppercase heading-normal">
                       {t('qr.title')}
                     </h3>
                     
-                    <p className="text-gray-400 mb-8 text-lg">
+                    <p className="text-text/70 mb-8 text-lg font-body text-normal">
                       {t('qr.subtitle')}
                     </p>
                     
                     {/* Demo Steps */}
                     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                       <div className="text-center group">
-                        <div className="bg-purple-500/20 rounded-xl p-4 mb-3 border border-purple-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(168,85,247,0.5)]">
-                          <Smartphone className="w-8 h-8 mx-auto text-purple-400 transition-transform duration-300 group-hover:scale-125" />
+                        <div className="bg-primary/20 rounded-forka p-4 mb-3 border-2 border-primary/30 shadow-forka transition-transform duration-300 group-hover:scale-110">
+                          <Smartphone className="w-8 h-8 mx-auto text-primary transition-transform duration-300 group-hover:scale-125" />
                         </div>
-                        <div className="text-sm text-gray-300">{t('qr.step1')}</div>
+                        <div className="text-sm text-text font-body text-normal">{t('qr.step1')}</div>
                       </div>
                       <div className="text-center group">
-                        <div className="bg-cyan-500/20 rounded-xl p-4 mb-3 border border-cyan-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(34,211,238,0.5)]">
-                          <Target className="w-8 h-8 mx-auto text-cyan-400 transition-transform duration-300 group-hover:scale-125" />
+                        <div className="bg-primary/20 rounded-forka p-4 mb-3 border-2 border-primary/30 shadow-forka transition-transform duration-300 group-hover:scale-110">
+                          <Target className="w-8 h-8 mx-auto text-primary transition-transform duration-300 group-hover:scale-125" />
                         </div>
-                        <div className="text-sm text-gray-300">{t('qr.step2')}</div>
+                        <div className="text-sm text-text font-body text-normal">{t('qr.step2')}</div>
                       </div>
                       <div className="text-center group">
-                        <div className="bg-green-500/20 rounded-xl p-4 mb-3 border border-green-500/30 transition-transform duration-300 group-hover:scale-110 group-hover:drop-shadow-[0_0_16px_rgba(34,197,94,0.5)]">
-                          <CreditCard className="w-8 h-8 mx-auto text-green-400 transition-transform duration-300 group-hover:scale-125" />
+                        <div className="bg-primary/20 rounded-forka p-4 mb-3 border-2 border-primary/30 shadow-forka transition-transform duration-300 group-hover:scale-110">
+                          <CreditCard className="w-8 h-8 mx-auto text-primary transition-transform duration-300 group-hover:scale-125" />
                         </div>
-                        <div className="text-sm text-gray-300">{t('qr.step3')}</div>
+                        <div className="text-sm text-text font-body text-normal">{t('qr.step3')}</div>
                       </div>
                     </div>
                     
@@ -251,14 +253,14 @@ const Index = () => {
                       <DialogTrigger asChild>
                         <Button 
                           size="lg" 
-                          className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-sm sm:text-base lg:text-lg font-semibold shadow-lg hover:shadow-purple-500/25 transition-all duration-300 hover:scale-105 w-full sm:w-auto"
+                          className="btn px-4 sm:px-6 lg:px-8 py-3 sm:py-4 text-sm sm:text-base lg:text-lg transition-all duration-300 hover:scale-105 w-full sm:w-auto"
                           onClick={() => handleEscaneaDemoDialogChange(true)}
                         >
                           <Sparkles className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                           {t('qr.cta')}
                         </Button>
                       </DialogTrigger>
-                      <DialogContent className="bg-gray-900 border-gray-800 max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
+                      <DialogContent className="bg-white border-2 border-primary max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4 shadow-forka">
                         <SurveyForm onSuccess={() => setIsEscaneaDemoOpen(false)} />
                       </DialogContent>
                     </Dialog>
@@ -267,12 +269,12 @@ const Index = () => {
               </div>
               
               {/* Floating Badge */}
-              <div className="absolute -top-4 -right-4 bg-gradient-to-r from-purple-500 to-cyan-500 text-white px-6 py-3 rounded-full text-sm font-semibold animate-pulse shadow-lg">
+              <div className="absolute -top-4 -right-4 accent-gradient text-white px-6 py-3 rounded-forka text-sm font-heading font-bold animate-pulse shadow-forka uppercase text-normal">
                 {t('qr.badge')}
               </div>
               
               {/* Bottom highlight */}
-              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-gradient-to-r from-transparent via-purple-500/50 to-transparent blur-sm"></div>
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-3/4 h-1 bg-primary/50 blur-sm"></div>
             </div>
           </div>
         </section>
@@ -287,12 +289,10 @@ const Index = () => {
         >
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-20">
-              <h2 className="text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  {t('how.title')}
-                </span>
+              <h2 className="text-4xl sm:text-5xl font-heading font-bold mb-6 text-primary uppercase heading-normal">
+                {t('how.title')}
               </h2>
-              <p className="text-xl text-gray-400">{t('how.subtitle')}</p>
+              <p className="text-xl text-text/70 font-body text-normal">{t('how.subtitle')}</p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -316,12 +316,12 @@ const Index = () => {
                   icon: "💳"
                 }
               ].map((item, index) => (
-                <Card key={index} className="group bg-gray-900/50 border-gray-800 hover:border-purple-500/30 transition-all duration-300 hover:-translate-y-2">
+                <Card key={index} className="card group hover:-translate-y-2 transition-all duration-300">
                   <CardContent className="p-8 text-center space-y-6">
                     <div className="text-5xl mb-4">{item.icon}</div>
-                    <div className="text-sm font-bold text-purple-400 mb-2">{item.step}</div>
-                    <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{item.description}</p>
+                    <div className="text-sm font-bold text-primary mb-2 uppercase font-heading text-normal">{item.step}</div>
+                    <h3 className="text-2xl font-heading font-bold text-primary mb-3 uppercase heading-normal">{item.title}</h3>
+                    <p className="text-text/70 leading-relaxed font-body text-normal">{item.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -340,18 +340,14 @@ const Index = () => {
           <div className="container mx-auto max-w-6xl">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
               <div>
-                <Badge className="bg-cyan-500/20 text-cyan-300 border-cyan-500/30 mb-4 sm:mb-6">
+                <Badge className="bg-primary/20 text-primary border-primary/30 mb-4 sm:mb-6 uppercase font-heading text-normal">
                   <Zap className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
                   {t('app.badge')}
                 </Badge>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-                  <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                    {t('app.title')}
-                  </span>
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 sm:mb-6 text-primary uppercase heading-normal">
+                  {t('app.title')}
                 </h2>
-                <p className="text-lg sm:text-xl text-gray-400 mb-6 sm:mb-8">
-                  {t('app.subtitle')}
-                </p>
+                <p className="text-lg sm:text-xl text-text/70 mb-6 sm:mb-8 font-body text-normal">{t('app.subtitle')}</p>
 
                 <div className="space-y-4">
                   {[
@@ -363,26 +359,26 @@ const Index = () => {
                     t('app.feature6')
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"></div>
-                      <span className="text-gray-300">{feature}</span>
+                      <div className="w-2 h-2 accent-gradient rounded-full"></div>
+                      <span className="text-text/70 font-body text-normal">{feature}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div className="relative">
-                <div className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 border border-purple-500/20">
+                <div className="bg-primary/10 border-2 border-primary/30 rounded-forka p-4 sm:p-6 lg:p-8 shadow-forka">
                   <div className="grid grid-cols-2 gap-3 sm:gap-4">
                     {[
-                      { title: t('stats.orders'), value: "23", color: "from-purple-500 to-purple-600", shadow: "shadow-[0_0_16px_rgba(168,85,247,0.3)]" },
-                      { title: t('stats.tables'), value: "12", color: "from-cyan-500 to-cyan-600", shadow: "shadow-[0_0_16px_rgba(34,211,238,0.3)]" },
-                      { title: t('stats.today'), value: "€1,234", color: "from-purple-500 to-cyan-500", shadow: "shadow-[0_0_16px_rgba(34,197,94,0.3)]" },
-                      { title: t('stats.time'), value: "8min", color: "from-cyan-500 to-purple-500", shadow: "shadow-[0_0_16px_rgba(59,130,246,0.3)]" }
+                      { title: t('stats.orders'), value: "23", color: "accent-gradient", shadow: "shadow-forka" },
+                      { title: t('stats.tables'), value: "12", color: "accent-gradient", shadow: "shadow-forka" },
+                      { title: t('stats.today'), value: "€1,234", color: "accent-gradient", shadow: "shadow-forka" },
+                      { title: t('stats.time'), value: "8min", color: "accent-gradient", shadow: "shadow-forka" }
                     ].map((stat, index) => (
-                      <div key={index} className="bg-gray-900/80 rounded-lg sm:rounded-xl p-3 sm:p-4 lg:p-6 border border-gray-800 group transition-all duration-300 hover:border-purple-500/30 hover:-translate-y-1 text-left">
-                        <div className={`w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 bg-gradient-to-r ${stat.color} rounded-md sm:rounded-lg mb-2 sm:mb-3 flex items-center justify-start transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse group-hover:${stat.shadow}`}></div>
-                        <div className="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-1">{stat.value}</div>
-                        <div className="text-xs sm:text-sm text-gray-400">{stat.title}</div>
+                      <div key={index} className="card p-3 sm:p-4 lg:p-6 group transition-all duration-300 hover:-translate-y-1 text-left">
+                        <div className={`w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 ${stat.color} rounded-forka mb-2 sm:mb-3 flex items-center justify-start transition-transform duration-300 group-hover:scale-110 group-hover:animate-pulse group-hover:${stat.shadow}`}></div>
+                        <div className="text-lg sm:text-xl lg:text-2xl font-heading font-bold text-primary mb-1 uppercase heading-normal">{stat.value}</div>
+                        <div className="text-xs sm:text-sm text-text/70 font-body text-normal">{stat.title}</div>
                       </div>
                     ))}
                   </div>
@@ -392,7 +388,7 @@ const Index = () => {
 
             {/* App Store & Google Play Badges - Próximamente */}
             <div className="w-full flex flex-col items-center justify-center py-6 sm:py-8 lg:py-10">
-              <span className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 text-center px-4">{t('app.stores')}</span>
+              <span className="text-base sm:text-lg font-heading font-bold text-primary mb-3 sm:mb-4 text-center px-4 uppercase heading-normal">{t('app.stores')}</span>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-center">
                 {/* App Store badge */}
                 <a href="#" className="overflow-hidden rounded-lg shadow-lg" tabIndex={-1} aria-disabled>
@@ -431,14 +427,12 @@ const Index = () => {
         >
           <div className="container mx-auto max-w-6xl">
             <div className="text-center mb-20">
-              <Badge className="bg-gradient-to-r from-purple-500/20 to-cyan-500/20 text-purple-300 border-purple-500/30 mb-6">
+              <Badge className="bg-primary/20 text-primary border-primary/30 mb-6 uppercase font-heading text-normal">
                 <Target className="w-4 h-4 mr-2" />
                 {t('ai.badge')}
               </Badge>
-              <h2 className="text-5xl font-bold mb-6">
-                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                  {t('ai.title')}
-                </span>
+              <h2 className="text-4xl sm:text-5xl font-heading font-bold mb-6 text-primary uppercase heading-normal">
+                {t('ai.title')}
               </h2>
             </div>
 
@@ -460,13 +454,13 @@ const Index = () => {
                   description: t('ai.feature3.desc')
                 }
               ].map((feature, index) => (
-                <Card key={index} className="group bg-gray-900/30 border-gray-800 hover:border-purple-500/30 transition-all duration-300 hover:bg-gray-900/50">
+                <Card key={index} className="card group transition-all duration-300 hover:-translate-y-2">
                   <CardContent className="p-8 text-center space-y-6">
                     <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">
                       {feature.icon}
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-3">{feature.title}</h3>
-                    <p className="text-gray-400 leading-relaxed">{feature.description}</p>
+                    <h3 className="text-xl font-heading font-bold text-primary mb-3 uppercase heading-normal">{feature.title}</h3>
+                    <p className="text-text/70 leading-relaxed font-body text-normal">{feature.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -483,13 +477,13 @@ const Index = () => {
           className={`py-16 px-6`}
         >
           <div className="container mx-auto max-w-4xl text-center">
-            <h3 className="text-2xl font-bold mb-8 text-white">{t('tech.title')}</h3>
+            <h3 className="text-2xl font-heading font-bold mb-8 text-primary uppercase heading-normal">{t('tech.title')}</h3>
             <div className="flex flex-wrap justify-center gap-6 items-center">
               {[
                 "Next.js", "React Native", "NestJS", "PostgreSQL", 
                 "Stripe", "Socket.io", "Cloud Vision", "Expo"
               ].map((tech, index) => (
-                <Badge key={index} variant="outline" className="px-4 py-2 text-sm border-gray-700 text-white hover:border-purple-500/50">
+                <Badge key={index} variant="outline" className="px-4 py-2 text-sm border-primary/30 text-primary hover:border-primary font-body text-normal">
                   {tech}
                 </Badge>
               ))}
@@ -500,41 +494,44 @@ const Index = () => {
 
       {/* Suscripción */}
       <SectionReveal delay={500}>
-        <section id="suscripcion" className="py-24 px-6 bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950 relative">
-          <div className="container mx-auto max-w-2xl">
+        <section id="suscripcion" className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 sm:px-6 bg-primary/10 relative">
+          <div className="container mx-auto max-w-4xl">
             <div className="relative">
-              {/* Overlay negro semitransparente para oscurecer el gradiente */}
-              <div className="absolute inset-0 bg-black/40 rounded-3xl z-0 pointer-events-none" />
-              <div className="bg-gradient-to-r from-purple-700 to-cyan-700 rounded-3xl shadow-2xl p-10 md:p-16 text-white text-center border-2 border-purple-500/30 relative z-10">
-                <h2 className="text-4xl font-bold mb-4">{t('subscription.title')} <span className="text-5xl">{t('subscription.price')}</span></h2>
-                <ul className="text-lg text-left mx-auto max-w-xl space-y-6 mt-10">
-                  <li>
-                    <span className="font-bold">{t('subscription.feature1.title')}</span><br />
-                    {t('subscription.feature1.desc')}
+              <div className="card p-6 sm:p-8 md:p-10 lg:p-16 text-center border-2 border-primary shadow-forka">
+                <h2 className="subscription-title text-2xl sm:text-3xl md:text-4xl font-heading font-bold mb-4 sm:mb-6 text-primary uppercase heading-normal">
+                  {t('subscription.title')} 
+                  <span className="block mt-2 sm:mt-3 pricing-text-responsive accent-gradient bg-clip-text text-transparent">
+                    {t('subscription.price')}
+                  </span>
+                </h2>
+                <ul className="text-sm sm:text-base md:text-lg text-left mx-auto max-w-2xl space-y-4 sm:space-y-5 md:space-y-6 mt-6 sm:mt-8 md:mt-10 font-body text-normal">
+                  <li className="text-text break-words">
+                    <span className="font-bold text-primary break-words">{t('subscription.feature1.title')}</span><br />
+                    <span className="break-words">{t('subscription.feature1.desc')}</span>
                   </li>
-                  <li>
-                    <span className="font-bold">{t('subscription.feature2.title')}</span><br />
-                    {t('subscription.feature2.desc')}
+                  <li className="text-text break-words">
+                    <span className="font-bold text-primary break-words">{t('subscription.feature2.title')}</span><br />
+                    <span className="break-words">{t('subscription.feature2.desc')}</span>
                   </li>
-                  <li>
-                    <span className="font-bold">{t('subscription.feature3.title')}</span><br />
-                    {t('subscription.feature3.desc')}
+                  <li className="text-text break-words">
+                    <span className="font-bold text-primary break-words">{t('subscription.feature3.title')}</span><br />
+                    <span className="break-words">{t('subscription.feature3.desc')}</span>
                   </li>
-                  <li>
-                    <span className="font-bold">{t('subscription.feature4.title')}</span><br />
-                    {t('subscription.feature4.desc')}
+                  <li className="text-text break-words">
+                    <span className="font-bold text-primary break-words">{t('subscription.feature4.title')}</span><br />
+                    <span className="break-words">{t('subscription.feature4.desc')}</span>
                   </li>
-                  <li>
-                    <span className="font-bold">{t('subscription.feature5.title')}</span><br />
-                    {t('subscription.feature5.desc')}
+                  <li className="text-text break-words">
+                    <span className="font-bold text-primary break-words">{t('subscription.feature5.title')}</span><br />
+                    <span className="break-words">{t('subscription.feature5.desc')}</span>
                   </li>
-                  <li>
-                    <span className="font-bold">{t('subscription.feature6.title')}</span><br />
-                    {t('subscription.feature6.desc')}
+                  <li className="text-text break-words">
+                    <span className="font-bold text-primary break-words">{t('subscription.feature6.title')}</span><br />
+                    <span className="break-words">{t('subscription.feature6.desc')}</span>
                   </li>
-                  <li>
-                    <span className="font-bold">{t('subscription.feature7.title')}</span><br />
-                    {t('subscription.feature7.desc')}
+                  <li className="text-text break-words">
+                    <span className="font-bold text-primary break-words">{t('subscription.feature7.title')}</span><br />
+                    <span className="break-words">{t('subscription.feature7.desc')}</span>
                   </li>
                 </ul>
               </div>
@@ -553,10 +550,8 @@ const Index = () => {
       >
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-20">
-            <h2 className="text-5xl font-bold mb-6">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                {t('testimonials.title')}
-              </span>
+            <h2 className="text-4xl sm:text-5xl font-heading font-bold mb-6 text-primary uppercase heading-normal">
+              {t('testimonials.title')}
             </h2>
           </div>
 
@@ -581,17 +576,17 @@ const Index = () => {
                 rating: 5
               }
             ].map((testimonial, index) => (
-              <Card key={index} className="bg-gray-900/50 border-gray-800 hover:border-purple-500/30 transition-all duration-300">
+              <Card key={index} className="card hover:shadow-forka-hover transition-all duration-300">
                 <CardContent className="p-6 space-y-4">
                   <div className="flex gap-1">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <span key={i} className="text-yellow-400 text-lg">⭐</span>
+                      <span key={i} className="text-primary text-lg">⭐</span>
                     ))}
                   </div>
-                  <p className="text-gray-300 italic leading-relaxed">"{testimonial.content}"</p>
+                  <p className="text-text italic leading-relaxed font-body text-normal">"{testimonial.content}"</p>
                   <div>
-                    <div className="font-semibold text-white">{testimonial.name}</div>
-                    <div className="text-sm text-gray-400">{testimonial.role}</div>
+                    <div className="font-semibold text-primary font-heading heading-normal">{testimonial.name}</div>
+                    <div className="text-sm text-text/70 font-body text-normal">{testimonial.role}</div>
                   </div>
                 </CardContent>
               </Card>
@@ -610,10 +605,8 @@ const Index = () => {
       >
         <div className="container mx-auto max-w-4xl">
           <div className="text-center mb-12 sm:mb-16">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                {t('faq.title')}
-              </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 sm:mb-6 text-primary uppercase heading-normal">
+              {t('faq.title')}
             </h2>
           </div>
 
@@ -636,10 +629,10 @@ const Index = () => {
                 a: t('faq.a4')
               }
             ].map((faq, index) => (
-              <Card key={index} className="bg-gray-900/30 border-gray-800 hover:border-purple-500/30 transition-all duration-300">
+              <Card key={index} className="card hover:shadow-forka-hover transition-all duration-300">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-lg mb-2 text-white">{faq.q}</h3>
-                  <p className="text-gray-400 leading-relaxed">{faq.a}</p>
+                  <h3 className="font-semibold text-lg mb-2 text-primary font-heading heading-normal">{faq.q}</h3>
+                  <p className="text-text/70 leading-relaxed font-body text-normal">{faq.a}</p>
                 </CardContent>
               </Card>
             ))}
@@ -656,13 +649,11 @@ const Index = () => {
         }`}
       >
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="bg-gradient-to-br from-purple-900/50 to-cyan-900/50 rounded-2xl sm:rounded-3xl p-6 sm:p-12 border border-purple-500/20 backdrop-blur-sm">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                {t('cta.title')}
-              </span>
+          <div className="card p-6 sm:p-12 border-2 border-primary shadow-forka">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold mb-4 sm:mb-6 text-primary uppercase heading-normal">
+              {t('cta.title')}
             </h2>
-            <p className="text-lg sm:text-xl text-gray-300 mb-8 sm:mb-12 px-4 sm:px-0">
+            <p className="text-lg sm:text-xl text-text/70 mb-8 sm:mb-12 px-4 sm:px-0 font-body text-normal">
               {t('cta.subtitle')}
             </p>
 
@@ -670,17 +661,17 @@ const Index = () => {
               <DialogTrigger asChild>
                 <Button 
                   size="lg" 
-                  className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-700 hover:to-cyan-700 font-semibold px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto"
+                  className="btn px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto"
                 >
                   {t('cta.button')}
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-gray-900 border-gray-800 max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4">
+              <DialogContent className="bg-white border-2 border-primary max-w-[95vw] sm:max-w-2xl max-h-[90vh] overflow-y-auto mx-4 shadow-forka">
                 <SurveyForm onSuccess={handleSurveySuccess} />
               </DialogContent>
             </Dialog>
             
-            <p className="text-xs sm:text-sm text-gray-500 mt-4 sm:mt-6 px-4 sm:px-0">
+            <p className="text-xs sm:text-sm text-text/50 mt-4 sm:mt-6 px-4 sm:px-0 font-body text-normal">
               {t('cta.disclaimer')}
             </p>
           </div>
@@ -688,32 +679,33 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-8 sm:py-10 px-4 sm:px-6 border-t border-gray-800">
+      <footer className="py-8 sm:py-10 px-4 sm:px-6 border-t-2 border-primary">
         <div className="container mx-auto max-w-6xl text-center">
-          <div className="text-xl sm:text-2xl font-bold mb-2">
-            <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <img src="/forka-logo.svg" alt="Forka Logo" className="w-6 h-6" />
+            <span className="text-xl sm:text-2xl font-heading font-bold text-primary uppercase heading-normal">
               Forka
             </span>
           </div>
-          <p className="text-gray-500 text-xs sm:text-sm mb-4">{t('footer.tagline')}</p>
+          <p className="text-text/70 text-xs sm:text-sm mb-4 font-body text-normal">{t('footer.tagline')}</p>
           <div className="flex justify-center gap-4 sm:gap-6 mb-4">
             {/* Instagram Logo */}
             <span className="inline-block" title="Instagram">
               <svg width="24" height="24" className="sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" className="text-pink-500"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" className="text-pink-500"></path>
-                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" className="text-pink-500"></line>
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" className="text-primary"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" className="text-primary"></path>
+                <line x1="17.5" y1="6.5" x2="17.5" y2="6.5" className="text-primary"></line>
               </svg>
             </span>
             {/* X (Twitter) Logo */}
             <span className="inline-block" title="X">
               <svg width="24" height="24" className="sm:w-7 sm:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M17.5 6.5L6.5 17.5" className="text-gray-400"></path>
-                <path d="M6.5 6.5l11 11" className="text-gray-400"></path>
+                <path d="M17.5 6.5L6.5 17.5" className="text-primary"></path>
+                <path d="M6.5 6.5l11 11" className="text-primary"></path>
               </svg>
             </span>
           </div>
-          <div className="text-gray-700 text-xs">© 2024 Forka</div>
+          <div className="text-text/50 text-xs font-body text-normal">© 2024 Forka</div>
         </div>
       </footer>
     </div>
