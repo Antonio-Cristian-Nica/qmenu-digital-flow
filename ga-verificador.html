@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Verificador de Google Analytics - Forka.app</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .test-section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s ease;
+        }
+        
+        .test-section:hover {
+            border-color: #4facfe;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .status {
+            padding: 15px 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1.1em;
+            border-left: 5px solid;
+            animation: slideIn 0.5s ease;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .success {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            border-left-color: #28a745;
+        }
+        
+        .error {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            color: #721c24;
+            border-left-color: #dc3545;
+        }
+        
+        .info {
+            background: linear-gradient(135deg, #d1ecf1 0%, #bee5eb 100%);
+            color: #0c5460;
+            border-left-color: #17a2b8;
+        }
+        
+        .warning {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            color: #856404;
+            border-left-color: #ffc107;
+        }
+        
+        .test-button {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px 10px 10px 0;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        .test-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        }
+        
+        .test-button:active {
+            transform: translateY(-1px);
+        }
+        
+        .config-info {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+        
+        .config-info h3 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .config-info p {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .network-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9em;
+        }
+        
+        .network-table th,
+        .network-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .network-table th {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            font-weight: 600;
+            color: #495057;
+        }
+        
+        .network-table tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+        
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #6c757d;
+        }
+        
+        .realtime-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #28a745;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Verificador de Google Analytics</h1>
+            <p>Comprobación completa para forka.app</p>
+        </div>
+        
+        <div class="content">
+            <div class="config-info">
+                <h3>📊 Configuración Actual</h3>
+                <p><strong>Sitio web:</strong> forka.app</p>
+                <p><strong>Google Analytics ID:</strong> G-XXQ3EN0KNX</p>
+                <p><strong>Fecha de verificación:</strong> <span id="currentDate"></span></p>
+            </div>
+            
+            <div class="test-section">
+                <h2>🚀 Verificación Automática</h2>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+                </div>
+                <button class="test-button" onclick="runAllTests()">
+                    <span class="emoji">🔍</span>Ejecutar Todas las Pruebas
+                </button>
+                <button class="test-button" onclick="testEvents()">
+                    <span class="emoji">🎯</span>Probar Eventos
+                </button>
+                <button class="test-button" onclick="checkNetwork()">
+                    <span class="emoji">🌐</span>Verificar Red
+                </button>
+                <div id="testResults"></div>
+            </div>
+            
+            <div class="test-section">
+                <h2>📊 Estado de Google Analytics</h2>
+                <div id="gaStatus"></div>
+            </div>
+            
+            <div class="test-section">
+                <h2>🌐 Monitoreo de Red</h2>
+                <p>Requests detectados a Google Analytics:</p>
+                <div id="networkMonitor"></div>
+            </div>
+            
+            <div class="test-section">
+                <h2>🎯 Eventos de Prueba</h2>
+                <p>Haz clic en estos botones para generar eventos:</p>
+                <button class="test-button" onclick="sendTestEvent('button_click', 'test_cta')">
+                    <span class="emoji">👆</span>Botón CTA
+                </button>
+                <button class="test-button" onclick="sendTestEvent('form_interaction', 'test_form')">
+                    <span class="emoji">📝</span>Formulario
+                </button>
+                <button class="test-button" onclick="sendTestEvent('page_engagement', 'test_scroll')">
+                    <span class="emoji">📄</span>Scroll
+                </button>
+                <div id="eventResults"></div>
+            </div>
+            
+            <div class="test-section">
+                <h2>⏱️ Verificación en Tiempo Real</h2>
+                <div class="status info">
+                    <span class="realtime-indicator"></span>
+                    <strong>Instrucciones:</strong>
+                    <ol style="margin-top: 10px; padding-left: 20px;">
+                        <li>Abre <a href="https://analytics.google.com/" target="_blank">Google Analytics</a> en una nueva pestaña</li>
+                        <li>Ve a <strong>Informes > Tiempo real</strong></li>
+                        <li>Vuelve a esta página y haz clic en los botones</li>
+                        <li>Deberías ver tu actividad en tiempo real</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>🔧 Herramienta de verificación para Google Analytics ID: G-XXQ3EN0KNX</p>
+            <p>Creada específicamente para forka.app</p>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        let testsPassed = 0;
+        let totalTests = 0;
+        let networkRequests = [];
+        
+        // Configuración
+        const GA_ID = 'G-XXQ3EN0KNX';
+        const SITE_URL = 'forka.app';
+        
+        // Inicializar página
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('currentDate').textContent = new Date().toLocaleString('es-ES');
+            setupNetworkMonitoring();
+            updateGAStatus();
+            // No ejecutar las pruebas automáticamente
+        });
+        
+        // Función principal para ejecutar todas las pruebas
+        function runAllTests() {
+            testsPassed = 0;
+            totalTests = 0;
+            updateProgress(0);
+            clearResults();
+            
+            addResult('🚀 Iniciando verificación completa...', 'info');
+            
+            // Ejecutar pruebas de forma secuencial sin setTimeout
+            testGoogleAnalytics();
+            testDataLayer();
+            testScripts();
+            testGlobalVariables();
+            testPageTracking();
+            finishTests();
+        }
+        
+        // Verificar Google Analytics
+        function testGoogleAnalytics() {
+            totalTests++;
+            if (typeof gtag !== 'undefined' || typeof window.gtag !== 'undefined') {
+                testsPassed++;
+                addResult('✅ Google Analytics (gtag) está disponible', 'success');
+            } else {
+                addResult('❌ Google Analytics (gtag) no está disponible', 'error');
+            }
+            updateProgress((testsPassed / totalTests) * 100);
+        }
+        
+        // Verificar DataLayer
+        function testDataLayer() {
+            totalTests++;
+            if (typeof dataLayer !== 'undefined' || typeof window.dataLayer !== 'undefined') {
+                testsPassed++;
+                const dlLength = (window.dataLayer || dataLayer).length;
+                addResult(`✅ dataLayer está disponible (${dlLength} eventos)`, 'success');
+            } else {
+                addResult('❌ dataLayer no está disponible', 'error');
+            }
+            updateProgress((testsPassed / totalTests) * 100);
+        }
+        
+        // Verificar scripts
+        function testScripts() {
+            totalTests++;
+            const scripts = document.querySelectorAll('script[src*="googletagmanager.com"], script[src*="google-analytics.com"]');
+            if (scripts.length > 0) {
+                testsPassed++;
+                addResult(`✅ Scripts de Google Analytics encontrados (${scripts.length})`, 'success');
+            } else {
+                addResult('❌ Scripts de Google Analytics no encontrados', 'error');
+            }
+            updateProgress((testsPassed / totalTests) * 100);
+        }
+        
+        // Verificar variables globales
+        function testGlobalVariables() {
+            totalTests++;
+            let available = 0;
+            let total = 0;
+            
+            // Verificar gtag
+            total++;
+            if (typeof window.gtag === 'function') {
+                available++;
+            }
+            
+            // Verificar dataLayer
+            total++;
+            if (Array.isArray(window.dataLayer)) {
+                available++;
+            }
+            
+            // Verificar ga (legacy)
+            total++;
+            if (typeof window.ga === 'function') {
+                available++;
+            }
+            
+            if (available >= 2) {
+                testsPassed++;
+                addResult(`✅ Variables globales de GA disponibles (${available}/${total})`, 'success');
+            } else {
+                addResult(`⚠️ Algunas variables globales no están disponibles (${available}/${total})`, 'warning');
+            }
+            updateProgress((testsPassed / totalTests) * 100);
+        }
+        
+        // Verificar tracking de página
+        function testPageTracking() {
+            totalTests++;
+            try {
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'page_view_test', {
+                        page_title: document.title,
+                        page_location: window.location.href,
+                        custom_parameter: 'verification_test'
+                    });
+                    testsPassed++;
+                    addResult('✅ Tracking de página ejecutado correctamente', 'success');
+                } else {
+                    addResult('❌ No se pudo ejecutar tracking de página', 'error');
+                }
+            } catch (error) {
+                addResult(`❌ Error en tracking de página: ${error.message}`, 'error');
+            }
+            updateProgress((testsPassed / totalTests) * 100);
+        }
+        
+        // Finalizar pruebas
+        function finishTests() {
+            const percentage = Math.round((testsPassed / totalTests) * 100);
+            updateProgress(100);
+            
+            if (percentage >= 80) {
+                addResult(`🎉 ¡Excelente! Google Analytics está funcionando correctamente (${percentage}%)`, 'success');
+            } else if (percentage >= 60) {
+                addResult(`⚠️ Google Analytics está parcialmente configurado (${percentage}%)`, 'warning');
+            } else {
+                addResult(`❌ Google Analytics no está funcionando correctamente (${percentage}%)`, 'error');
+            }
+            
+            updateGAStatus();
+        }
+        
+        // Probar eventos específicos
+        function testEvents() {
+            addResult('🎯 Ejecutando pruebas de eventos...', 'info');
+            
+            // Evento de formulario
+            sendTestEvent('form_submit', 'test_form');
+            
+            // Evento de botón
+            sendTestEvent('button_click', 'test_button');
+            
+            // Evento de conversión
+            sendTestEvent('conversion', 'test_conversion');
+            
+            addResult('✅ Eventos de prueba enviados. Verifica en Google Analytics > Tiempo real', 'success');
+        }
+        
+        // Enviar evento de prueba
+        function sendTestEvent(eventName, eventCategory) {
+            try {
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', eventName, {
+                        event_category: eventCategory,
+                        event_label: 'verification_test',
+                        custom_parameter: 'test_value',
+                        value: 1
+                    });
+                    
+                    addToEventResults(`✅ Evento enviado: ${eventName} (${eventCategory})`, 'success');
+                    console.log(`GA Event sent: ${eventName}`, { event_category: eventCategory });
+                } else {
+                    addToEventResults(`❌ No se pudo enviar evento: ${eventName}`, 'error');
+                }
+            } catch (error) {
+                addToEventResults(`❌ Error enviando evento: ${error.message}`, 'error');
+            }
+        }
+        
+        // Verificar red
+        function checkNetwork() {
+            addResult('🌐 Verificando requests de red...', 'info');
+            
+            if (networkRequests.length > 0) {
+                addResult(`✅ Se detectaron ${networkRequests.length} requests a Google Analytics`, 'success');
+                
+                let table = '<table class="network-table"><thead><tr><th>Hora</th><th>URL</th><th>Método</th><th>Estado</th></tr></thead><tbody>';
+                
+                networkRequests.forEach(req => {
+                    table += `<tr>
+                        <td>${req.time}</td>
+                        <td>${req.url.substring(0, 50)}...</td>
+                        <td>${req.method}</td>
+                        <td>${req.status}</td>
+                    </tr>`;
+                });
+                
+                table += '</tbody></table>';
+                
+                document.getElementById('networkMonitor').innerHTML = table;
+            } else {
+                addResult('⚠️ No se detectaron requests a Google Analytics', 'warning');
+                document.getElementById('networkMonitor').innerHTML = '<p>No se han detectado requests. Esto podría indicar que:</p><ul><li>Google Analytics no está cargado</li><li>Hay un bloqueador de anuncios activo</li><li>La configuración no es correcta</li></ul>';
+            }
+        }
+        
+        // Configurar monitoreo de red
+        function setupNetworkMonitoring() {
+            // Interceptar requests (método básico)
+            const originalFetch = window.fetch;
+            window.fetch = function(...args) {
+                const url = args[0];
+                if (typeof url === 'string' && (url.includes('google-analytics.com') || url.includes('googletagmanager.com'))) {
+                    networkRequests.push({
+                        time: new Date().toLocaleTimeString(),
+                        url: url,
+                        method: 'GET',
+                        status: 'Pending'
+                    });
+                }
+                return originalFetch.apply(this, args);
+            };
+        }
+        
+        // Actualizar estado de GA
+        function updateGAStatus() {
+            const statusDiv = document.getElementById('gaStatus');
+            let statusHTML = '';
+            
+            // Estado de gtag
+            if (typeof window.gtag === 'function') {
+                statusHTML += '<div class="status success">✅ gtag función disponible</div>';
+            } else {
+                statusHTML += '<div class="status error">❌ gtag función no disponible</div>';
+            }
+            
+            // Estado de dataLayer
+            if (Array.isArray(window.dataLayer)) {
+                statusHTML += `<div class="status success">✅ dataLayer disponible (${window.dataLayer.length} elementos)</div>`;
+            } else {
+                statusHTML += '<div class="status error">❌ dataLayer no disponible</div>';
+            }
+            
+            // ID de medición
+            statusHTML += `<div class="status info">📊 ID de medición configurado: ${GA_ID}</div>`;
+            
+            // URL del sitio
+            statusHTML += `<div class="status info">🌐 Sitio web: ${SITE_URL}</div>`;
+            
+            statusDiv.innerHTML = statusHTML;
+        }
+        
+        // Funciones de utilidad
+        function addResult(message, type) {
+            const resultsDiv = document.getElementById('testResults');
+            const resultElement = document.createElement('div');
+            resultElement.className = `status ${type}`;
+            resultElement.innerHTML = message;
+            resultsDiv.appendChild(resultElement);
+            resultsDiv.scrollTop = resultsDiv.scrollHeight;
+        }
+        
+        function addToEventResults(message, type) {
+            const resultsDiv = document.getElementById('eventResults');
+            const resultElement = document.createElement('div');
+            resultElement.className = `status ${type}`;
+            resultElement.innerHTML = message;
+            resultsDiv.appendChild(resultElement);
+        }
+        
+        function clearResults() {
+            document.getElementById('testResults').innerHTML = '';
+            document.getElementById('eventResults').innerHTML = '';
+        }
+        
+        function updateProgress(percentage) {
+            document.getElementById('progressBar').style.width = percentage + '%';
+        }
+        
+        // Ejecutar verificaciones adicionales cada 30 segundos (comentado para evitar bucles)
+        // setInterval(() => {
+        //     updateGAStatus();
+        // }, 30000);
+    </script>
+</body>
+</html>
